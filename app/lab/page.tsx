@@ -93,7 +93,7 @@ export default function LabPage() {
         {/* 页面标题 */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
-           ∷ 熵减实验室
+            ∷ 熵减实验室
           </h1>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto">在混沌中寻找秩序，在代码中构建理想的数字宇宙</p>
         </motion.div>
