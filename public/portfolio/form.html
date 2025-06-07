@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单功能 - 古贵炫</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .form-section:nth-child(1) { animation-delay: 0.1s; }
+        .form-section:nth-child(2) { animation-delay: 0.2s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #ff6b6b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover,
+        .radio-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .checkbox-item input,
+        .radio-item input {
+            accent-color: #ff6b6b;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover .file-upload-label {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ff6b6b;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .range-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .form-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .form-button.secondary {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .validation-message {
+            font-size: 14px;
+            margin-top: 5px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .validation-message.error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        .validation-message.success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .form-preview {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .preview-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .preview-item:last-child {
+            border-bottom: none;
+        }
+
+        .preview-label {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .preview-value {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .back-nav {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .checkbox-group,
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="page-title">表单功能展示</h1>
+            <p class="page-subtitle">数据收集 · 验证处理 · 交互体验</p>
+        </header>
+
+        <div class="form-grid">
+            <!-- 用户信息表单 -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <span>👤</span>
+                    用户信息表单
+                </h2>
+                <form id="userForm">
+                    <div class="form-group">
+                        <label class="form-label">姓名 *</label>
+                        <input type="text" class="form-input" id="userName" placeholder="请输入您的姓名" required>
+                        <div class="validation-message" id="userNameMsg"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">邮箱 *</label>
+                        <input type="email" class="form-input" id="userEmail" placeholder="请输入邮箱地址" required>
+                        <div class="validation-message" id="userEmailMsg"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">电话号码</label>
+                        <input type="tel" class="form-input" id="userPhone" placeholder="请输入手机号码">
+                        <div class="validation-message" id="userPhoneMsg"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">性别</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="male">
+                                <span>男</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="female">
+                                <span>女</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="other">
+                                <span>其他</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">年龄</label>
+                        <input type="range" class="range-slider" id="ageRange" min="18" max="65" value="25">
+                        <span class="range-value" id="ageValue">25</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">所在城市</label>
+                        <select class="form-select" id="userCity">
+                            <option value="">请选择城市</option>
+                            <option value="beijing">北京</option>
+                            <option value="shanghai">上海</option>
+                            <option value="guangzhou">广州</option>
+                            <option value="shenzhen">深圳</option>
+                            <option value="hangzhou">杭州</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">兴趣爱好</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="reading">
+                                <span>阅读</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="music">
+                                <span>音乐</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="sports">
+                                <span>运动</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="travel">
+                                <span>旅行</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="coding">
+                                <span>编程</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">头像上传</label>
+                        <div class="file-upload">
+                            <input type="file" id="userAvatar" accept="image/*">
+                            <label class="file-upload-label" for="userAvatar">
+                                点击选择文件或拖拽到此处
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">个人简介</label>
+                        <textarea class="form-textarea" id="userBio" placeholder="请简单介绍一下自己..."></textarea>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="formProgress"></div>
+                    </div>
+
+                    <button type="submit" class="form-button">提交表单</button>
+                    <button type="button" class="form-button secondary" onclick="resetForm()">重置表单</button>
+                    <button type="button" class="form-button secondary" onclick="previewForm()">预览数据</button>
+                </form>
+            </div>
+
+            <!-- 反馈表单 -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <span>💬</span>
+                    意见反馈表单
+                </h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label class="form-label">反馈类型 *</label>
+                        <select class="form-select" id="feedbackType" required>
+                            <option value="">请选择反馈类型</option>
+                            <option value="bug">Bug报告</option>
+                            <option value="feature">功能建议</option>
+                            <option value="improvement">改进建议</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">优先级</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="priority" value="low">
+                                <span>低</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="priority" value="medium" checked>
+                                <span>中</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="priority" value="high">
+                                <span>高</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">满意度评分</label>
+                        <input type="range" class="range-slider" id="satisfactionRange" min="1" max="10" value="8">
+                        <span class="range-value" id="satisfactionValue">8</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">反馈内容 *</label>
+                        <textarea class="form-textarea" id="feedbackContent" placeholder="请详细描述您的反馈内容..." required style="min-height: 120px;"></textarea>
+                        <div class="validation-message" id="feedbackContentMsg"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">相关截图</label>
+                        <div class="file-upload">
+                            <input type="file" id="feedbackImage" accept="image/*" multiple>
+                            <label class="file-upload-label" for="feedbackImage">
+                                支持多张图片上传
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">联系方式</label>
+                        <input type="text" class="form-input" id="contactInfo" placeholder="便于我们联系您（可选）">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="allowContact">
+                            <span>允许我们就此反馈与您联系</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="form-button">提交反馈</button>
+                    <button type="button" class="form-button secondary" onclick="resetFeedbackForm()">清空表单</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 表单预览区域 -->
+        <div class="form-preview" id="formPreview" style="display: none;">
+            <h2 class="section-title">
+                <span>👁️</span>
+                表单数据预览
+            </h2>
+            <div id="previewContent">
+                <!-- 预览内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <div class="back-nav">
+            <a href="index.html" class="nav-button">← 返回首页</a>
+            <a href="table.html" class="nav-button">表格功能</a>
+        </div>
+    </div>
+
+    <script>
+        // 表单验证规则
+        const validationRules = {
+            userName: {
+                required: true,
+                minLength: 2,
+                pattern: /^[\u4e00-\u9fa5a-zA-Z\s]+$/,
+                message: '姓名必须为2个字符以上的中文或英文'
+            },
+            userEmail: {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: '请输入有效的邮箱地址'
+            },
+            userPhone: {
+                pattern: /^1[3-9]\d{9}$/,
+                message: '请输入有效的手机号码'
+            }
+        };
+
+        // 实时验证函数
+        function validateField(fieldId, value) {
+            const rule = validationRules[fieldId];
+            if (!rule) return true;
+
+            const messageElement = document.getElementById(fieldId + 'Msg');
+            
+            if (rule.required && !value.trim()) {
+                showValidationMessage(messageElement, '此字段为必填项', 'error');
+                return false;
+            }
+
+            if (rule.minLength && value.length < rule.minLength) {
+                showValidationMessage(messageElement, rule.message, 'error');
+                return false;
+            }
+
+            if (rule.pattern && !rule.pattern.test(value)) {
+                showValidationMessage(messageElement, rule.message, 'error');
+                return false;
+            }
+
+            showValidationMessage(messageElement, '验证通过', 'success');
+            return true;
+        }
+
+        // 显示验证消息
+        function showValidationMessage(element, message, type) {
+            element.textContent = message;
+            element.className = `validation-message ${type}`;
+            element.style.display = 'block';
+        }
+
+        // 更新进度条
+        function updateFormProgress() {
+            const form = document.getElementById('userForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let filledCount = 0;
+
+            inputs.forEach(input => {
+                if (input.type === 'radio') {
+                    if (form.querySelector(`input[name="${input.name}"]:checked`)) {
+                        filledCount++;
+                    }
+                } else if (input.value.trim()) {
+                    filledCount++;
+                }
+            });
+
+            const progress = (filledCount / inputs.length) * 100;
+            document.getElementById('formProgress').style.width = progress + '%';
+        }
+
+        // 范围滑块更新
+        function updateRangeValue(rangeId, valueId) {
+            const range = document.getElementById(rangeId);
+            const value = document.getElementById(valueId);
+            
+            range.addEventListener('input', function() {
+                value.textContent = this.value;
+            });
+        }
+
+        // 文件上传处理
+        function handleFileUpload(inputId) {
+            const input = document.getElementById(inputId);
+            const label = input.nextElementSibling;
+            
+            input.addEventListener('change', function() {
+                const files = this.files;
+                if (files.length > 0) {
+                    if (files.length === 1) {
+                        label.textContent = `已选择: ${files[0].name}`;
+                    } else {
+                        label.textContent = `已选择 ${files.length} 个文件`;
+                    }
+                    label.style.color = '#4ecdc4';
+                } else {
+                    label.textContent = label.getAttribute('data-original') || '点击选择文件或拖拽到此处';
+                    label.style.color = '';
+                }
+            });
+        }
+
+        // 表单提交处理
+        function handleFormSubmit(formId, successMessage) {
+            const form = document.getElementById(formId);
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 验证表单
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.focus();
+                        showNotification('请填写所有必填字段', 'error');
+                        return;
+                    }
+                });
+
+                if (isValid) {
+                    // 模拟提交过程
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    
+                    submitBtn.textContent = '提交中...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        showNotification(successMessage, 'success');
+                        
+                        // 可选：重置表单
+                        // form.reset();
+                        // updateFormProgress();
+                    }, 2000);
+                }
+            });
+        }
+
+        // 预览表单数据
+        function previewForm() {
+            const form = document.getElementById('userForm');
+            const formData = new FormData(form);
+            const previewDiv = document.getElementById('formPreview');
+            const previewContent = document.getElementById('previewContent');
+            
+            let previewHTML = '';
+            
+            // 基本信息
+            previewHTML += `<div class="preview-item"><span class="preview-label">姓名:</span><span class="preview-value">${formData.get('userName') || '未填写'}</span></div>`;
+            previewHTML += `<div class="preview-item"><span class="preview-label">邮箱:</span><span class="preview-value">${formData.get('userEmail') || '未填写'}</span></div>`;
+            previewHTML += `<div class="preview-item"><span class="preview-label">电话:</span><span class="preview-value">${formData.get('userPhone') || '未填写'}</span></div>`;
+            
+            // 性别
+            const gender = form.querySelector('input[name="gender"]:checked');
+            previewHTML += `<div class="preview-item"><span class="preview-label">性别:</span><span class="preview-value">${gender ? gender.nextElementSibling.textContent : '未选择'}</span></div>`;
+            
+            // 年龄
+            const age = document.getElementById('ageRange').value;
+            previewHTML += `<div class="preview-item"><span class="preview-label">年龄:</span><span class="preview-value">${age}岁</span></div>`;
+            
+            // 城市
+            const city = document.getElementById('userCity');
+            previewHTML += `<div class="preview-item"><span class="preview-label">城市:</span><span class="preview-value">${city.options[city.selectedIndex].text}</span></div>`;
+            
+            // 兴趣爱好
+            const hobbies = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.nextElementSibling.textContent);
+            previewHTML += `<div class="preview-item"><span class="preview-label">兴趣爱好:</span><span class="preview-value">${hobbies.join(', ') || '未选择'}</span></div>`;
+            
+            // 个人简介
+            const bio = document.getElementById('userBio').value;
+            previewHTML += `<div class="preview-item"><span class="preview-label">个人简介:</span><span class="preview-value">${bio || '未填写'}</span></div>`;
+            
+            previewContent.innerHTML = previewHTML;
+            previewDiv.style.display = 'block';
+            previewDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 重置表单
+        function resetForm() {
+            if (confirm('确定要重置表单吗？所有数据将被清空。')) {
+                document.getElementById('userForm').reset();
+                document.getElementById('ageValue').textContent = '25';
+                document.getElementById('formProgress').style.width = '0%';
+                
+                // 清除验证消息
+                document.querySelectorAll('.validation-message').forEach(msg => {
+                    msg.style.display = 'none';
+                });
+                
+                showNotification('表单已重置', 'success');
+            }
+        }
+
+        // 重置反馈表单
+        function resetFeedbackForm() {
+            if (confirm('确定要清空反馈表单吗？')) {
+                document.getElementById('feedbackForm').reset();
+                document.getElementById('satisfactionValue').textContent = '8';
+                showNotification('反馈表单已清空', 'success');
+            }
+        }
+
+        // 显示通知
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            const bgColor = type === 'success' ? 'linear-gradient(45deg, #4ecdc4, #44a08d)' : 'linear-gradient(45deg, #ff6b6b, #ee5a52)';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: slideInRight 0.3s ease-out;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置范围滑块
+            updateRangeValue('ageRange', 'ageValue');
+            updateRangeValue('satisfactionRange', 'satisfactionValue');
+            
+            // 设置文件上传
+            handleFileUpload('userAvatar');
+            handleFileUpload('feedbackImage');
+            
+            // 设置表单提交
+            handleFormSubmit('userForm', '用户信息提交成功！');
+            handleFormSubmit('feedbackForm', '反馈提交成功，感谢您的建议！');
+            
+            // 实时验证
+            Object.keys(validationRules).forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('blur', function() {
+                        validateField(fieldId, this.value);
+                        updateFormProgress();
+                    });
+                    
+                    field.addEventListener('input', function() {
+                        updateFormProgress();
+                    });
+                }
+            });
+            
+            // 监听所有表单变化以更新进度
+            document.getElementById('userForm').addEventListener('change', updateFormProgress);
+            
+            // 初始化进度
+            updateFormProgress();
+        });
+
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

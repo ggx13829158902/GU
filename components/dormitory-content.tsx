@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Home, Users, Trophy, Heart, FileText, Briefcase, User, Menu, X } from "lucide-react"
 
@@ -18,37 +18,6 @@ export function DormitoryContent() {
     { id: "achievements", name: "成果展示", icon: Heart },
     { id: "interaction", name: "互动交流", icon: Briefcase },
   ]
-
-  // Add useEffect at the top of the component to handle background music
-  useEffect(() => {
-    // Create background music element for dormitory content
-    const backgroundMusic = document.createElement("audio")
-    backgroundMusic.src = "/music/shining.mp3"
-    backgroundMusic.loop = true
-    backgroundMusic.autoplay = true
-    backgroundMusic.volume = 0.3
-    backgroundMusic.style.display = "none"
-
-    // Check if music is already playing to avoid duplicates
-    const existingMusic = document.querySelector('audio[src="/music/shining.mp3"]')
-    if (!existingMusic) {
-      document.body.appendChild(backgroundMusic)
-
-      const playPromise = backgroundMusic.play()
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.log("Autoplay prevented:", error)
-        })
-      }
-    }
-
-    return () => {
-      const musicElement = document.querySelector('audio[src="/music/shining.mp3"]')
-      if (musicElement && musicElement.parentNode) {
-        musicElement.parentNode.removeChild(musicElement)
-      }
-    }
-  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">

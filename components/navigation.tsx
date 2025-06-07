@@ -1,155 +1,91 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { Home, User, Trophy, Heart, FileText, Beaker, LogIn } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Home, FlaskRoundIcon as Flask, Trophy, Heart, FileText, User, Briefcase } from "lucide-react"
 import { useAppContext } from "@/contexts/app-context"
 
-export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const pathname = usePathname()
-  const { setCurrentPage } = useAppContext()
+export function Navigation() {
+  const [isOpen, setIsOpen] = useState(false)
+  const { state } = useAppContext()
 
-  const navigationItems = [
-    { name: "首页", href: "/", icon: Home },
-    { name: "实验室", href: "/lab", icon: Flask },
-    { name: "成就", href: "/achievements", icon: Trophy },
-    { name: "兴趣", href: "/interests", icon: Heart },
-    { name: "博客", href: "/blog", icon: FileText },
-    { name: "作品集", href: "/portfolio", icon: Briefcase },
-    { name: "INFP空间", href: "/infp-space", icon: User },
+  const navItems = [
+    { href: "/", label: "首页", icon: Home },
+    { href: "/lab", label: "实验室", icon: Beaker },
+    { href: "/achievements", label: "成就", icon: Trophy },
+    { href: "/interests", label: "兴趣", icon: Heart },
+    { href: "/blog", label: "博客", icon: FileText },
+    { href: "/portfolio", label: "作品集", icon: User },
+    { href: "/infp-space", label: "INFP空间", icon: Heart },
+    { href: "/login", label: "登录系统", icon: LogIn },
   ]
 
-  // 处理路由变化
-  useEffect(() => {
-    setCurrentPage(pathname)
-    setIsMenuOpen(false) // 路由变化时关闭菜单
-  }, [pathname, setCurrentPage])
-
-  // 处理菜单状态
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-
-    return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isMenuOpen])
-
-  // 处理菜单切换
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev)
-  }, [])
-
   return (
-    <div>
-      {/* Desktop Navigation */}
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-blue-500/20"
-      >
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/">
-              <motion.div
-                className="text-2xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                DeepHue
-              </motion.div>
-            </Link>
-
-            {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navigationItems.map((item) => {
-                const Icon = item.icon
-                const isActive = pathname === item.href
-                return (
-                  <Link key={item.name} href={item.href}>
-                    <motion.div
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all ${
-                        isActive
-                          ? "bg-blue-500/20 text-blue-300"
-                          : "text-blue-200 hover:text-blue-100 hover:bg-blue-500/10"
-                      }`}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span className="text-sm font-medium">{item.name}</span>
-                    </motion.div>
-                  </Link>
-                )
-              })}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              className="lg:hidden p-2 text-blue-300 hover:text-blue-100 transition-colors"
-              onClick={toggleMenu}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle menu"
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-blue-500/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </motion.button>
+              DeepHue
+            </motion.div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center space-x-1 text-blue-200 hover:text-blue-100 transition-colors"
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </Link>
+              )
+            })}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-blue-200 hover:text-blue-100 transition-colors">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
-      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
+        {/* Mobile Navigation */}
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden py-4 border-t border-blue-500/30"
           >
-            <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-md" />
-            <div className="relative flex flex-col items-center justify-center h-full space-y-8">
-              {navigationItems.map((item, index) => {
-                const Icon = item.icon
-                const isActive = pathname === item.href
-                return (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link href={item.href}>
-                      <motion.div
-                        className={`flex items-center space-x-3 px-6 py-3 rounded-lg text-lg font-medium transition-all ${
-                          isActive
-                            ? "bg-blue-500/20 text-blue-300"
-                            : "text-blue-200 hover:text-blue-100 hover:bg-blue-500/10"
-                        }`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Icon className="w-5 h-5" />
-                        <span>{item.name}</span>
-                      </motion.div>
-                    </Link>
-                  </motion.div>
-                )
-              })}
-            </div>
+            {navItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center space-x-2 text-blue-200 hover:text-blue-100 transition-colors py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </Link>
+              )
+            })}
           </motion.div>
         )}
-      </AnimatePresence>
-    </div>
+      </div>
+    </nav>
   )
 }

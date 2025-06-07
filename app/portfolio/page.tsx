@@ -36,10 +36,10 @@ export default function PortfolioPage() {
       description: "一个精心设计的调查问卷表单，具有现代化的用户界面和丰富的交互功能",
       type: "Web表单设计",
       tech: ["HTML5", "CSS3", "JavaScript", "响应式设计"],
-      image: "/placeholder.svg?height=200&width=300",
-      liveUrl: "/portfolio/survey-form-1.html",
+      image: "/images/17.jpg",
+      liveUrl: "/portfolio/form.html",
       github: "#",
-      date: "2024年3月",
+      date: "2025年4月",
       status: "completed",
       features: [
         "现代化的用户界面设计",
@@ -60,7 +60,7 @@ export default function PortfolioPage() {
       image: "/placeholder.svg?height=200&width=300",
       liveUrl: "/portfolio/survey-form-2.html",
       github: "#",
-      date: "2024年2月",
+      date: "2025年4月",
       status: "completed",
       features: [
         "标准HTML表单元素应用",
@@ -73,15 +73,36 @@ export default function PortfolioPage() {
       highlights: ["掌握HTML表单的核心概念", "理解表单数据的收集和处理", "实现清晰的代码结构"],
     },
     {
+      id: "homework-completion",
+      title: "作业完成度复现",
+      description: "一个作业完成度追踪系统，展示各科目的完成进度和统计信息",
+      type: "数据可视化",
+      tech: ["HTML5", "CSS3", "进度条", "数据展示"],
+      image: "/images/14.jpg",
+      liveUrl: "/portfolio/text1.html",
+      github: "#",
+      date: "2025年4月",
+      status: "completed",
+      features: [
+        "各科目完成度统计",
+        "可视化进度条展示",
+        "彩色主题设计",
+        "响应式布局",
+        "数据动态更新",
+        "清晰的信息层次",
+      ],
+      highlights: ["CSS进度条动画实现", "数据可视化设计", "用户友好的界面布局"],
+    },
+    {
       id: "dormitory-project",
       title: "共创和谐宿舍管理平台",
       description: "一个完整的宿舍管理系统，集成了多个功能模块，提供全面的宿舍生活服务",
       type: "Web应用系统",
       tech: ["HTML5", "CSS3", "JavaScript", "Web动画", "响应式设计"],
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/images/10.jpg",
       liveUrl: "/portfolio/dormitory-project.html",
       github: "#",
-      date: "2024年4月",
+      date: "2025年4月",
       status: "completed",
       features: [
         "多页面单页应用架构",
@@ -178,7 +199,13 @@ export default function PortfolioPage() {
             >
               <div className="bg-slate-800/60 backdrop-blur-sm rounded-2xl border border-blue-500/30 hover:border-blue-400/60 transition-all duration-300 overflow-hidden hover:bg-slate-800/80 h-full">
                 {/* 项目头部 */}
-                <div className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                <div
+                  className="relative h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center bg-cover bg-center"
+                  style={{
+                    backgroundImage: project.image.includes("placeholder") ? "none" : `url(${project.image})`,
+                    backgroundBlendMode: "overlay",
+                  }}
+                >
                   <div className="text-6xl opacity-50">{project.type.includes("表单") ? <FileText /> : <Globe />}</div>
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-medium">
