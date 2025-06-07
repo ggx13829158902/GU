@@ -10,8 +10,14 @@ const DynamicPortfolioPage = dynamic(() => import("@/components/portfolio-page")
 
 export default function PortfolioPage() {
   return (
-    <Suspense fallback={<LoadingScreen />}>
-      <DynamicPortfolioPage />
-    </Suspense>
+    <>
+      <audio autoPlay loop className="hidden">
+        <source src="/music/shining-background.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <Suspense fallback={<LoadingScreen />}>
+        <DynamicPortfolioPage />
+      </Suspense>
+    </>
   )
 }

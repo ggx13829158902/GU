@@ -1,354 +1,367 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Gamepad2, Music, Zap, Play, Pause, Volume2, Heart } from "lucide-react"
+import { Trophy, Award, Users, TrendingUp, Code, Calendar, MapPin, Star } from "lucide-react"
+import { AchievementParticles } from "@/components/particle-systems/achievement-particles"
 
-export default function InterestsPage() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [selectedInterest, setSelectedInterest] = useState<string | null>(null)
-  const audioRef = useRef<HTMLAudioElement>(null)
+export default function AchievementsPage() {
+  const [selectedAchievement, setSelectedAchievement] = useState<string | null>(null)
 
-  const interests = [
+  const achievements = [
     {
-      id: "gaming",
-      title: "游戏世界",
-      icon: Gamepad2,
-      color: "from-green-400 to-blue-500",
-      description: "在虚拟世界中探索无限可能，体验不同的人生",
-      details: [
-        "策略类游戏：享受思维的博弈",
-        "RPG游戏：沉浸在故事的海洋",
-        "竞技游戏：挑战自我极限",
-        "独立游戏：发现创意的火花",
-      ],
-      quote: '"游戏是另一种形式的艺术，代码是另一种形式的诗歌"',
+      id: "lanqiao",
+      title: "蓝桥杯程序设计大赛",
+      subtitle: "C/C++大学C组省三等奖",
+      icon: Trophy,
+      color: "from-yellow-400 to-orange-500",
+      date: "2025年4月",
+      location: "省级竞赛",
+      description: "在激烈的编程竞赛中脱颖而出，展现算法思维和代码实现能力",
+      details: ["参赛语言：C/C++", "竞赛组别：大学C组", "获奖等级：省三等奖", "核心技能：算法设计、数据结构、代码优化"],
+      achievements: ["掌握高效的算法设计思路", "提升代码调试和优化能力", "培养竞赛心理素质"],
+      impact: "通过竞赛实践，深化了对编程的理解，为后续技术学习奠定基础",
+      particles: 12,
     },
     {
-      id: "football",
-      title: "足球激情",
-      icon: Zap,
-      color: "from-orange-400 to-red-500",
-      description: "绿茵场上的22个人，演绎着最纯粹的团队协作",
+      id: "design",
+      title: "计算机设计大赛",
+      subtitle: "项目负责人，省三等奖",
+      icon: Award,
+      color: "from-blue-400 to-purple-500",
+      date: "2025年4月",
+      location: "省级竞赛",
+      description: "作为项目负责人，带领团队完成创新性计算机应用设计项目",
       details: [
-        "团队协作：11个人的默契配合",
-        "战术理解：阅读比赛的艺术",
-        "身体素质：保持健康的体魄",
-        "精神品质：永不放弃的信念",
+        "角色：项目负责人",
+        "获奖等级：省三等奖",
+        "项目类型：计算机应用设计",
+        "核心能力：项目管理、技术创新、团队协作",
       ],
-      quote: '"足球教会我的不仅是技巧，更是面对挫折的勇气"',
+      achievements: ["锻炼项目管理和团队领导能力", "提升技术方案设计能力", "增强创新思维和实践能力"],
+      impact: "领导团队项目的经历培养了我的组织协调能力和技术视野",
+      particles: 15,
     },
     {
-      id: "music",
-      title: "音乐共鸣",
-      icon: Music,
-      color: "from-purple-400 to-pink-500",
-      description: "周杰伦的旋律，《她的睫毛》的温柔，音乐是心灵的语言",
+      id: "guoxue",
+      title: "国学知识竞赛",
+      subtitle: "队长身份，决赛入围",
+      icon: Users,
+      color: "from-green-400 to-teal-500",
+      date: "2025年5月",
+      location: "校级竞赛",
+      description: "以队长身份带领两名组员参加国学知识竞赛，成功入围决赛",
+      details: ["角色：队长", "团队规模：3人", "成绩：决赛入围", "核心能力：领导力、传统文化素养、团队协作"],
+      achievements: ["培养团队协作和领导能力", "加深对传统文化的理解", "提升知识整合和表达能力"],
+      impact: "通过文化竞赛，平衡了理工科学习与人文素养的培养",
+      particles: 10,
+    },
+    {
+      id: "finance",
+      title: "金融证券投资大赛",
+      subtitle: "校第一名",
+      icon: TrendingUp,
+      color: "from-emerald-400 to-cyan-500",
+      date: "2025年5月",
+      location: "全国大学生竞赛",
+      description: "在全国大学生金融证券投资大赛中获得校内第一名的优异成绩",
       details: [
-        "最爱歌手：周杰伦",
-        "最喜欢的歌：《她的睫毛》",
-        "音乐类型：华语流行、R&B",
-        "音乐感悟：旋律是情感的载体",
+        "获奖等级：校第一名",
+        "竞赛类型：金融证券投资",
+        "实战经验：一年股市交易",
+        "核心能力：技术分析、风险管理、投资决策",
       ],
-      quote: '"她的睫毛弯的嘴角，无预警地对我笑"',
+      achievements: ["掌握金融市场分析方法", "培养风险控制意识", "提升数据分析和决策能力"],
+      impact: "金融投资经历培养了我的风险意识和数据分析思维",
+      particles: 18,
     },
   ]
 
-  const handlePlayMusic = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
+  const stats = [
+    { label: "获奖次数", value: "4", color: "text-yellow-300" },
+    { label: "竞赛参与", value: "6+", color: "text-blue-300" },
+    { label: "团队项目", value: "3", color: "text-green-300" },
+    { label: "领导经验", value: "2", color: "text-purple-300" },
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-blue-900 pt-20">
-      <div className="container mx-auto px-6 py-12">
-        {/* 页面标题 */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-300 to-blue-300 bg-clip-text text-transparent mb-4">
-            ∷ 共振频率
-          </h1>
-          <p className="text-green-200 text-lg max-w-2xl mx-auto">在兴趣的海洋中寻找共鸣，在爱好的世界里释放真我</p>
-        </motion.div>
+    <>
+      <audio autoPlay loop className="hidden">
+        <source src="/music/shining-background.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 pt-20 relative overflow-hidden">
+        {/* Add Achievement Particles */}
+        <AchievementParticles count={30} />
 
-        {/* 兴趣展示区域 */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
-          {interests.map((interest, index) => {
-            const Icon = interest.icon
-            const isSelected = selectedInterest === interest.id
+        <div className="container mx-auto px-6 py-12 relative z-10">
+          {/* 页面标题 */}
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
+            <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent mb-4">
+              ∷ 星光轨迹
+            </h1>
+            <p className="text-purple-200 text-lg max-w-2xl mx-auto mb-8">
+              记录成长路上的每一个里程碑，见证从迷茫到清晰的蜕变历程
+            </p>
 
-            return (
-              <motion.div
-                key={interest.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className="relative group cursor-pointer"
-                onClick={() => setSelectedInterest(isSelected ? null : interest.id)}
-              >
-                {/* 发光效果 */}
+            {/* 成就统计 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+              {stats.map((stat, index) => (
                 <motion.div
-                  className={`absolute -inset-1 bg-gradient-to-r ${interest.color} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000`}
-                  animate={isSelected ? { opacity: 0.75 } : {}}
-                />
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
+                  className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-4 border border-purple-500/30"
+                >
+                  <div className={`text-2xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
+                  <div className="text-purple-300/80 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-                <div className="relative bg-slate-800/80 backdrop-blur-sm rounded-lg p-8 border border-green-500/30 hover:border-green-400/60 transition-all h-full">
-                  {/* 图标 */}
+          {/* 成就展示 */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon
+              const isSelected = selectedAchievement === achievement.id
+
+              return (
+                <motion.div
+                  key={achievement.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  className="relative group cursor-pointer"
+                  onClick={() => setSelectedAchievement(isSelected ? null : achievement.id)}
+                >
                   <motion.div
-                    className="flex items-center justify-center w-20 h-20 mx-auto mb-6"
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    animate={isSelected ? { scale: 1.1 } : {}}
-                  >
-                    <div
-                      className={`w-full h-full bg-gradient-to-r ${interest.color} rounded-full flex items-center justify-center`}
-                    >
-                      <Icon className="w-10 h-10 text-white" />
-                    </div>
-                  </motion.div>
+                    className={`absolute -inset-1 bg-gradient-to-r ${achievement.color} rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000`}
+                    animate={isSelected ? { opacity: 0.75 } : {}}
+                  />
 
-                  {/* 标题 */}
-                  <h3 className="text-2xl font-bold text-green-200 text-center mb-4">{interest.title}</h3>
-
-                  {/* 描述 */}
-                  <p className="text-green-300/80 text-center mb-6">{interest.description}</p>
-
-                  {/* 展开的详细信息 */}
-                  <AnimatePresence>
-                    {isSelected && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="border-t border-green-500/20 pt-6 space-y-4"
-                      >
-                        <div className="space-y-3">
-                          {interest.details.map((detail, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.1 }}
-                              className="flex items-start space-x-3"
+                  <div className="relative bg-slate-800/80 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 hover:border-purple-400/60 transition-all">
+                    {/* 头部信息 */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-4 mb-3">
+                          <motion.div
+                            className="w-12 h-12 rounded-full flex items-center justify-center"
+                            style={{
+                              background: `linear-gradient(to right, var(--tw-gradient-stops))`,
+                            }}
+                            whileHover={{ scale: 1.1, rotate: 10 }}
+                          >
+                            <div
+                              className={`w-full h-full bg-gradient-to-r ${achievement.color} rounded-full flex items-center justify-center`}
                             >
-                              <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                              <span className="text-green-200/90 text-sm">{detail}</span>
-                            </motion.div>
-                          ))}
+                              <Icon className="w-6 h-6 text-white" />
+                            </div>
+                          </motion.div>
+                          <div>
+                            <h3 className="text-xl font-bold text-purple-200">{achievement.title}</h3>
+                            <p className="text-purple-300/80 text-sm">{achievement.subtitle}</p>
+                          </div>
                         </div>
 
-                        <motion.blockquote
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.5 }}
-                          className="border-l-4 border-green-400 pl-4 italic text-green-300/80 text-sm mt-6"
-                        >
-                          {interest.quote}
-                        </motion.blockquote>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
+                        {/* 时间和地点 */}
+                        <div className="flex items-center space-x-4 text-sm text-purple-300/60 mb-4">
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="w-4 h-4" />
+                            <span>{achievement.date}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{achievement.location}</span>
+                          </div>
+                        </div>
+                      </div>
 
-        {/* 音乐播放器 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 mb-16"
-        >
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-purple-200 mb-2 flex items-center justify-center">
-              <Music className="w-6 h-6 mr-3 text-purple-400" />
-              音乐时光
-            </h2>
-            <p className="text-purple-300/80">让周杰伦的旋律带你进入音乐的世界</p>
+                      <motion.div
+                        animate={{ rotate: isSelected ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-purple-400"
+                      >
+                        <Star className="w-5 h-5" />
+                      </motion.div>
+                    </div>
+
+                   
+                    {/* 描述 */}
+                    <p className="text-purple-300/80 mb-6">{achievement.description}</p>
+
+                    {/* 详细信息 */}
+                    <AnimatePresence>
+                      {isSelected && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-6 border-t border-purple-500/20 pt-6"
+                        >
+                          {/* 详细信息 */}
+                          <div>
+                            <h4 className="text-purple-200 font-medium mb-3 flex items-center">
+                              <Code className="w-4 h-4 mr-2" />
+                              详细信息
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {achievement.details.map((detail, i) => (
+                                <motion.div
+                                  key={i}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.1 }}
+                                  className="flex items-start space-x-2 text-sm"
+                                >
+                                  <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0" />
+                                  <span className="text-purple-200/90">{detail}</span>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* 收获成就 */}
+                          <div>
+                            <h4 className="text-purple-200 font-medium mb-3 flex items-center">
+                              <Trophy className="w-4 h-4 mr-2" />
+                              收获成就
+                            </h4>
+                            <div className="space-y-2">
+                              {achievement.achievements.map((item, i) => (
+                                <motion.div
+                                  key={i}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.2 + i * 0.1 }}
+                                  className="flex items-start space-x-2 text-sm"
+                                >
+                                  <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0" />
+                                  <span className="text-green-200/90">{item}</span>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* 影响感悟 */}
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="bg-purple-500/10 rounded-lg p-4 border border-purple-400/20"
+                          >
+                            <h4 className="text-purple-200 font-medium mb-2 flex items-center">
+                              <Star className="w-4 h-4 mr-2" />
+                              影响与感悟
+                            </h4>
+                            <p className="text-purple-300/80 text-sm italic">{achievement.impact}</p>
+                          </motion.div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* 粒子效果 */}
+                    {isSelected && (
+                      <div className="absolute inset-0 pointer-events-none">
+                        {Array.from({ length: achievement.particles }).map((_, i) => (
+                          <motion.div
+                            key={i}
+                            className={`absolute w-1 h-1 bg-gradient-to-r ${achievement.color} rounded-full opacity-60`}
+                            style={{
+                              left: `${20 + Math.random() * 60}%`,
+                              top: `${20 + Math.random() * 60}%`,
+                            }}
+                            animate={{
+                              opacity: [0.3, 1, 0.3],
+                              scale: [0.5, 1.5, 0.5],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Number.POSITIVE_INFINITY,
+                              delay: i * 0.1,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            )}
           </div>
 
-          {/* 虚拟音乐播放器 */}
-          <div className="max-w-md mx-auto">
-            <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg p-6 border border-purple-400/30">
-              <div className="text-center mb-4">
-                <h3 className="text-lg font-semibold text-purple-200">她的睫毛</h3>
-                <p className="text-purple-300/80 text-sm">周杰伦</p>
-              </div>
+          {/* 成长时间线 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+            className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30 mb-16"
+          >
+            <h2 className="text-2xl font-bold text-purple-200 mb-8 text-center flex items-center justify-center">
+              <Trophy className="w-6 h-6 mr-3 text-yellow-400" />
+              成长时间线
+            </h2>
 
-              {/* 播放控制 */}
-              <div className="flex items-center justify-center space-x-4 mb-4">
-                <motion.button
-                  onClick={handlePlayMusic}
-                  className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" />}
-                </motion.button>
-                <Volume2 className="w-5 h-5 text-purple-400" />
-              </div>
+            <div className="relative">
+              {/* 时间线 */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-400 to-blue-400"></div>
 
-              {/* 音波可视化 */}
-              <div className="flex items-center justify-center space-x-1 h-8">
-                {Array.from({ length: 20 }).map((_, i) => (
+              <div className="space-y-12">
+                {achievements.map((achievement, index) => (
                   <motion.div
-                    key={i}
-                    className="w-1 bg-gradient-to-t from-purple-400 to-pink-400 rounded-full"
-                    animate={
-                      isPlaying
-                        ? {
-                            height: [4, Math.random() * 24 + 4, 4],
-                          }
-                        : { height: 4 }
-                    }
-                    transition={{
-                      duration: 0.5,
-                      repeat: isPlaying ? Number.POSITIVE_INFINITY : 0,
-                      delay: i * 0.1,
-                    }}
-                  />
+                    key={achievement.id}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.2 + index * 0.2 }}
+                    className={`flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
+                  >
+                    {/* 内容卡片 */}
+                    <div className={`w-5/12 ${index % 2 === 0 ? "text-right pr-8" : "text-left pl-8"}`}>
+                      <div className="bg-slate-700/60 rounded-lg p-4 border border-purple-400/30">
+                        <h3 className="font-bold text-purple-200 mb-1">{achievement.title}</h3>
+                        <p className="text-purple-300/80 text-sm mb-2">{achievement.subtitle}</p>
+                        <span className="text-purple-400/60 text-xs">{achievement.date}</span>
+                      </div>
+                    </div>
+
+                    {/* 中心节点 */}
+                    <div className="w-2/12 flex justify-center">
+                      <div
+                        className={`w-4 h-4 rounded-full bg-gradient-to-r ${achievement.color} border-4 border-slate-800 relative z-10`}
+                      ></div>
+                    </div>
+
+                    {/* 占位空间 */}
+                    <div className="w-5/12"></div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* 隐藏的音频元素（实际项目中可以替换为真实音频） */}
-          <audio ref={audioRef} loop>
-            <source src="/placeholder-audio.mp3" type="audio/mpeg" />
-          </audio>
-        </motion.div>
-
-        {/* 足球场微缩模型 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-          className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-green-500/30"
-        >
-          <h2 className="text-2xl font-bold text-green-200 mb-6 text-center flex items-center justify-center">
-            <Zap className="w-6 h-6 mr-3 text-green-400" />
-            绿茵梦想
-          </h2>
-
-          {/* 足球场 */}
-          <div className="relative bg-green-600/20 rounded-lg p-8 border-2 border-green-400/30 max-w-2xl mx-auto">
-            {/* 中圈 */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 border-2 border-green-300/50 rounded-full"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-green-300 rounded-full"></div>
-
-            {/* 中线 */}
-            <div className="absolute top-0 bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 bg-green-300/50"></div>
-
-            {/* 球门区域 */}
-            <div className="absolute top-1/2 left-2 transform -translate-y-1/2 w-8 h-16 border-2 border-green-300/50 border-l-0"></div>
-            <div className="absolute top-1/2 right-2 transform -translate-y-1/2 w-8 h-16 border-2 border-green-300/50 border-r-0"></div>
-
-            {/* 动态足球 */}
-            <motion.div
-              className="absolute w-3 h-3 bg-white rounded-full shadow-lg"
-              animate={{
-                x: [50, 200, 150, 100, 50],
-                y: [50, 30, 80, 60, 50],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            />
-
-            {/* 球员位置点 */}
-            {[
-              { x: "20%", y: "30%" },
-              { x: "20%", y: "70%" },
-              { x: "40%", y: "20%" },
-              { x: "40%", y: "50%" },
-              { x: "40%", y: "80%" },
-              { x: "60%", y: "25%" },
-              { x: "60%", y: "75%" },
-              { x: "80%", y: "40%" },
-              { x: "80%", y: "60%" },
-            ].map((pos, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-blue-400 rounded-full"
-                style={{ left: pos.x, top: pos.y }}
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.6, 1, 0.6],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.2,
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="text-center mt-6">
-            <p className="text-green-300/80 italic">"足球不只是一项运动，它是团队精神和个人意志的完美结合"</p>
-          </div>
-        </motion.div>
-
-        {/* 兴趣统计 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="text-center mt-12"
-        >
-          <div className="grid grid-cols-3 gap-8 max-w-md mx-auto">
-            <div className="text-center">
-              <motion.div
-                className="text-3xl font-bold text-green-300 mb-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              >
-                ∞
-              </motion.div>
-              <p className="text-green-200/80 text-sm">游戏时光</p>
+          {/* 感悟总结 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.8 }}
+            className="text-center"
+          >
+            <blockquote className="text-xl text-purple-300/80 italic max-w-3xl mx-auto leading-relaxed">
+              "每一次获奖都不是终点，而是新征程的起点。
+              <br />
+              在竞赛中学会坚持，在团队中学会协作，在挑战中学会成长。
+              <br />
+              这些闪光的时刻，构成了我青春年华中最珍贵的回忆。"
+            </blockquote>
+            <div className="mt-6">
+              <span className="text-purple-400/60 text-sm">— 回望来路，展望前程</span>
             </div>
-            <div className="text-center">
-              <motion.div
-                className="text-3xl font-bold text-orange-300 mb-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
-              >
-                22
-              </motion.div>
-              <p className="text-orange-200/80 text-sm">足球精神</p>
-            </div>
-            <div className="text-center">
-              <motion.div
-                className="text-3xl font-bold text-purple-300 mb-2 flex items-center justify-center"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-              >
-                <Heart className="w-8 h-8" />
-              </motion.div>
-              <p className="text-purple-200/80 text-sm">音乐共鸣</p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 底部彩蛋提示 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="text-center mt-12"
-        >
-          <p className="text-green-300/60 text-sm font-mono">彩蛋提示：点击足球可触发隐藏音效 🎵</p>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
+

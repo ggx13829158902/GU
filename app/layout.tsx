@@ -37,7 +37,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "DeepHue - 古贵炫的个人宇宙",
-  description: "内向星云中的理性代码与诗意光谱 - 古贵炫的个人作品集与技术博客",
+  description: "星云中的理性代码与诗意光谱 - 古贵炫的个人作品集与技术博客",
   charset: "utf-8",
   viewport: "width=device-width, initial-scale=1.0, viewport-fit=cover",
   authors: [{ name: "古贵炫", url: "mailto:3306574730@qq.com" }],
@@ -124,9 +124,11 @@ export default function RootLayout({
               </div>
 
               {/* Background music */}
-              <audio autoPlay loop className="hidden">
-                <source src="/music/shining-background.mp3" type="audio/mpeg" />
-              </audio>
+              <audio autoPlay loop >
+  <source src="/music/shining-background.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
             </AppProvider>
           </FontManager>
         </ErrorBoundary>

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { BookOpen, Calendar, Tag, Eye, Heart, MessageCircle, Search } from "lucide-react"
+import { BookOpen, Calendar, Tag, Eye, Heart, MessageCircle, Search, Music } from "lucide-react"
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
@@ -101,165 +101,168 @@ export default function BlogPage() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 pt-20">
-      <div className="container mx-auto px-6 py-12">
-        {/* 页面标题 */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent mb-4">
-            ∷ 混沌日志
-          </h1>
-          <p className="text-indigo-200 text-lg max-w-2xl mx-auto">
-            记录思维的轨迹，分享成长的感悟，在文字中寻找内心的宁静
-          </p>
-        </motion.div>
-
-        {/* 搜索和分类 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12"
-        >
-          {/* 搜索框 */}
-          <div className="relative max-w-md mx-auto mb-8">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-indigo-400" />
-            <input
-              type="text"
-              placeholder="搜索文章..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-slate-800/60 backdrop-blur-sm border border-indigo-500/30 rounded-lg text-indigo-200 placeholder-indigo-400/60 focus:outline-none focus:border-indigo-400/60 transition-colors"
-            />
-          </div>
-
-          {/* 分类标签 */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-full border transition-all ${
-                  selectedCategory === category.id
-                    ? "bg-gradient-to-r " + category.color + " text-white border-transparent"
-                    : "bg-slate-800/60 text-indigo-200 border-indigo-500/30 hover:border-indigo-400/60"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {category.name}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* 文章列表 */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          <AnimatePresence>
-            {filteredPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ delay: index * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <div className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-6 border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:bg-slate-800/80">
-                  {/* 文章头部 */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center space-x-4 text-sm text-indigo-300/80">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <BookOpen className="w-4 h-4" />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-                    <div
-                      className={`px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${
-                        categories.find((c) => c.id === post.category)?.color
-                      } text-white`}
-                    >
-                      {categories.find((c) => c.id === post.category)?.name}
-                    </div>
-                  </div>
-
-                  {/* 文章标题 */}
-                  <h2 className="text-xl font-bold text-indigo-200 mb-3 group-hover:text-indigo-100 transition-colors">
-                    {post.title}
-                  </h2>
-
-                  {/* 文章摘要 */}
-                  <p className="text-indigo-300/80 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
-
-                  {/* 标签 */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded-full border border-indigo-400/30"
-                      >
-                        <Tag className="w-3 h-3 inline mr-1" />
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* 文章统计 */}
-                  <div className="flex items-center justify-between text-sm text-indigo-300/60">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <Eye className="w-4 h-4" />
-                        <span>{post.views}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Heart className="w-4 h-4" />
-                        <span>{post.likes}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <MessageCircle className="w-4 h-4" />
-                        <span>{post.comments}</span>
-                      </div>
-                    </div>
-                    <motion.span className="text-indigo-400 group-hover:text-indigo-300" whileHover={{ x: 5 }}>
-                      阅读更多 →
-                    </motion.span>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* 空状态 */}
-        {filteredPosts.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-            <BookOpen className="w-16 h-16 text-indigo-400/60 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-indigo-200 mb-2">暂无相关文章</h3>
-            <p className="text-indigo-300/60">尝试调整搜索条件或选择其他分类</p>
+    <>
+      <audio autoPlay loop className="hidden">
+        <source src="/music/shining-background.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 pt-20">
+        <div className="container mx-auto px-6 py-12">
+          {/* 页面标题 */}
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
+            <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-300 to-purple-300 bg-clip-text text-transparent mb-4">
+              ∷ 混沌日志
+            </h1>
+            <p className="text-indigo-200 text-lg max-w-2xl mx-auto">
+              记录思维的轨迹，分享成长的感悟，在文字中寻找内心的宁静
+            </p>
           </motion.div>
-        )}
 
-        {/* 写作感悟 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-indigo-500/30"
-        >
-          <h2 className="text-2xl font-bold text-indigo-200 mb-4 text-center">写作感悟</h2>
-          <blockquote className="text-center text-indigo-300/80 italic text-lg">
-            "文字是思维的载体，博客是成长的见证。
-            <br />
-            在这个数字化的时代，用代码构建世界，用文字记录心灵。"
-          </blockquote>
-          <div className="text-center mt-4">
-            <span className="text-indigo-400/60 text-sm">— 古贵炫</span>
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  )
-}
+          {/* 搜索和分类 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-12"
+          >
+            {/* 搜索框 */}
+            <div className="relative max-w-md mx-auto mb-8">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-indigo-400" />
+              <input
+                type="text"
+                placeholder="搜索文章..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-slate-800/60 backdrop-blur-sm border border-indigo-500/30 rounded-lg text-indigo-200 placeholder-indigo-400/60 focus:outline-none focus:border-indigo-400/60 transition-colors"
+              />
+            </div>
+
+            {/* 分类标签 */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {categories.map((category) => (
+                <motion.button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px - 6 py - 2 rounded - full border transition - all ${
+	selectedCategory === category.id
+		? "bg-gradient-to-r " + category.color + " text-white border-transparent"
+		: "bg-slate-800/60 text-indigo-200 border-indigo-500/30 hover:border-indigo-400/60"
+} `}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {category.name}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* 文章列表 */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            <AnimatePresence>
+              {filteredPosts.map((post, index) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group cursor-pointer"
+                >
+                  <div className="bg-slate-800/60 backdrop-blur-sm rounded-lg p-6 border border-indigo-500/30 hover:border-indigo-400/60 transition-all hover:bg-slate-800/80">
+                    {/* 文章头部 */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center space-x-4 text-sm text-indigo-300/80">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{post.date}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <BookOpen className="w-4 h-4" />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+                      <div
+                        className={`px - 3 py - 1 rounded - full text - xs font - medium bg - gradient - to - r ${
+	categories.find((c) => c.id === post.category)?.color
+} text - white`}
+                      >
+                        {categories.find((c) => c.id === post.category)?.name}
+                      </div>
+					                  {/* 文章标题 */}
+					                  <h2 className="text-xl font-bold text-indigo-200 mb-3 group-hover:text-indigo-100 transition-colors">
+					                    {post.title}
+					                  </h2>
+					  
+					                  {/* 文章摘要 */}
+					                  <p className="text-indigo-300/80 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+					  
+					                  {/* 标签 */}
+					                  <div className="flex flex-wrap gap-2 mb-4">
+					                    {post.tags.map((tag) => (
+					                      <span
+					                        key={tag}
+					                        className="px-2 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded-full border border-indigo-400/30"
+					                      >
+					                        <Tag className="w-3 h-3 inline mr-1" />
+					                        {tag}
+					                      </span>
+					                    ))}
+					                  </div>
+					  
+					                  {/* 文章统计 */}
+					                  <div className="flex items-center justify-between text-sm text-indigo-300/60">
+					                    <div className="flex items-center space-x-4">
+					                      <div className="flex items-center space-x-1">
+					                        <Eye className="w-4 h-4" />
+					                        <span>{post.views}</span>
+					                      </div>
+					                      <div className="flex items-center space-x-1">
+					                        <Heart className="w-4 h-4" />
+					                        <span>{post.likes}</span>
+					                      </div>
+					                      <div className="flex items-center space-x-1">
+					                        <MessageCircle className="w-4 h-4" />
+					                        <span>{post.comments}</span>
+					                      </div>
+					                    </div>
+					                    <motion.span className="text-indigo-400 group-hover:text-indigo-300" whileHover={{ x: 5 }}>
+					                      阅读更多 →
+					                    </motion.span>
+					                  </div>
+					                </div>
+					              </motion.article>
+					            ))}
+					          </AnimatePresence>
+					        </div>
+					  
+					        {/* 空状态 */}
+					        {filteredPosts.length === 0 && (
+					          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+					            <BookOpen className="w-16 h-16 text-indigo-400/60 mx-auto mb-4" />
+					            <h3 className="text-xl font-semibold text-indigo-200 mb-2">暂无相关文章</h3>
+					            <p className="text-indigo-300/60">尝试调整搜索条件或选择其他分类</p>
+					          </motion.div>
+					        )}
+					  
+					        {/* 写作感悟 */}
+					        <motion.div
+					          initial={{ opacity: 0, y: 20 }}
+					          animate={{ opacity: 1, y: 0 }}
+					          transition={{ delay: 0.8 }}
+					          className="mt-16 bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-indigo-500/30"
+					        >
+					          <h2 className="text-2xl font-bold text-indigo-200 mb-4 text-center">写作感悟</h2>
+					          <blockquote className="text-center text-indigo-300/80 italic text-lg">
+					            "文字是思维的载体，博客是成长的见证。
+					            <br />
+					            在这个数字化的时代，用代码构建世界，用文字记录心灵。"
+					          </blockquote>
+					          <div className="text-center mt-4">
+					            <span className="text-indigo-400/60 text-sm">— 古贵炫</span>
+					          </div>
+					        </motion.div>
+					      </div>
+					    </div>
+					  </>
+					  )}
