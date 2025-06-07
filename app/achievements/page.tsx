@@ -48,7 +48,7 @@ export default function AchievementsPage() {
       subtitle: "队长身份，决赛入围",
       icon: Users,
       color: "from-green-400 to-teal-500",
-      date: "2025年4月",
+      date: "2025年5月",
       location: "校级竞赛",
       description: "以队长身份带领两名组员参加国学知识竞赛，成功入围决赛",
       details: ["角色：队长", "团队规模：3人", "成绩：决赛入围", "核心能力：领导力、传统文化素养、团队协作"],
