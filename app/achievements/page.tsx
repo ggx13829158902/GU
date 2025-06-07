@@ -62,7 +62,7 @@ export default function AchievementsPage() {
       subtitle: "校第一名",
       icon: TrendingUp,
       color: "from-emerald-400 to-cyan-500",
-      date: "2025年4月",
+      date: "2025年5月",
       location: "全国大学生竞赛",
       description: "在全国大学生金融证券投资大赛中获得校内第一名的优异成绩",
       details: [

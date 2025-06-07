@@ -50,7 +50,7 @@ export default function InterestsPage() {
         "音乐类型：华语流行、R&B",
         "音乐感悟：旋律是情感的载体",
       ],
-      quote: '"她的睫毛 弯的嘴角 无预警地 对我笑"',
+      quote: '"她的睫毛 弯的嘴角，无预警地 对我笑"',
     },
   ]
 
