@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Code2, Database, Globe, Terminal, Eye, TrendingUp, ChevronRight } from "lucide-react"
+import { CodeParticles } from "@/components/particle-systems/code-particles"
 
 export default function LabPage() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
@@ -84,8 +85,11 @@ export default function LabPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-20">
-      <div className="container mx-auto px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 pt-20 relative">
+      {/* Add Code Particles */}
+      <CodeParticles count={40} />
+
+      <div className="container mx-auto px-6 py-12 relative z-10">
         {/* 页面标题 */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">

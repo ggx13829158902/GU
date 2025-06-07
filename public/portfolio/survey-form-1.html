@@ -1,0 +1,174 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>调查小问卷</title>
+    <style>
+        /* 添加基本样式美化界面 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        fieldset {
+            width: 30%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        legend {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+        p {
+            margin: 15px 0;
+        }
+        label {
+            cursor: pointer;
+        }
+        input[type="text"], 
+        input[type="password"], 
+        input[type="date"], 
+        select, 
+        textarea {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"], 
+        input[type="reset"] {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input[type="reset"] {
+            background-color: #f44336;
+            color: white;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        input[type="reset"]:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+	<a href="../index.html">首页</a> &gt; <a href="我的作业.html">我的作业</a> &gt; 第三次作业<br>
+    <fieldset>
+        <legend>调查小问卷</legend>
+        <form action="#" method="get">
+            <!-- 个人信息 -->
+            <p>
+                <label>姓名：<input type="text" 
+                                  name="username" 
+                                  placeholder="请输入用户名" 
+                                  required="required" /></label>
+            </p >
+            <p>
+                <label>密码：<input type="password" 
+                                  name="password" 
+                                  placeholder="请输入6位以上密码" 
+                                  minlength="6" 
+                                  required="required" /></label>
+            </p >
+
+            <!-- 性别选择 -->
+            <p>
+                性别：
+                <label><input type="radio" name="gender" value="1" id="male" /> 
+                    <img src="../../images/男生.png" width="32px" height="32px" alt="男"title="男"> 男</label>
+                <label><input type="radio" name="gender" value="0" id="female" checked="checked" /> 
+                    <img src="../../images/女生.png" width="32px" height="32px" alt="女"title="女"> 女</label>
+            </p >
+
+            <!-- 爱好选择 -->
+            <p>爱好：
+                <label><input type="checkbox" name="hobby" value="read" checked="checked" id="read" /> 
+                    <img src="../../images/看书.png" width="32px" height="32px" alt="阅读"title="阅读"onerror="this.style.display='none'; this.parentNode.innerHTML+='<span style=\'color:red;font-size:12px;\'>图片无法加载，请检查路径是否正确</span>'"
+        />阅读</label>
+                <label><input type="checkbox" name="hobby" value="game" id="game" /> 
+                    <img src="../../images/玩游戏.png" width="32px" height="32px" alt="游戏"title="游戏"onerror="this.style.display='none'; this.parentNode.innerHTML+='<span style=\'color:red;font-size:12px;\'>图片无法加载，请检查路径是否正确</span>'"
+        /> 游戏</label>
+                <label><input type="checkbox" name="hobby" value="run" id="run" /> 
+                    <img src="../../images/跑步.png" width="32px" height="32px" alt="跑步"title="跑步"onerror="this.style.display='none'; this.parentNode.innerHTML+='<span style=\'color:red;font-size:12px;\'>图片无法加载，请检查路径是否正确</span>'"
+        /> 跑步</label>
+            </p >
+
+            <!-- 添加星座选择 -->
+            <p>
+                星座：
+                <select name="zodiac" size="1">
+                    <option value="" disabled selected>请选择你的星座</option>
+                    <option value="aries">白羊座 (3.21-4.19)</option>
+                    <option value="taurus">金牛座 (4.20-5.20)</option>
+                    <option value="gemini">双子座 (5.21-6.21)</option>
+                    <option value="cancer">巨蟹座 (6.22-7.22)</option>
+                    <option value="leo">狮子座 (7.23-8.22)</option>
+                    <option value="virgo">处女座 (8.23-9.22)</option>
+                    <option value="libra">天秤座 (9.23-10.23)</option>
+                    <option value="scorpio">天蝎座 (10.24-11.22)</option>
+                    <option value="sagittarius">射手座 (11.23-12.21)</option>
+                    <option value="capricorn">摩羯座 (12.22-1.19)</option>
+                    <option value="aquarius">水瓶座 (1.20-2.18)</option>
+                    <option value="pisces">双鱼座 (2.19-3.20)</option>
+                </select>
+            </p >
+
+            <!-- 头像上传 -->
+            <p>
+		
+                <label>头像：<img src="../../images/我的头像.png" width="32px" height="32px" alt="我的头像" title="古贵炫"><input type="file" name="avatar" accept="image/*" /></label>
+            </p >
+
+            <!-- 生日 -->
+            <p>
+                <label>生日：<input type="date" name="birthday" max="2025-03-11" /></label>
+            </p >
+
+            <!-- 隐藏字段 -->
+            <p>
+                <input type="hidden" name="token" value="itsishu" />
+            </p >
+
+            <!-- 所在地 -->
+            <p>
+                所在地：
+                <select name="province" multiple="multiple" size="3">
+                    <option value="bj" selected="selected">北京市</option>
+                    <option value="gd">广东省</option>
+                    <option value="sc" selected="selected">四川省</option>
+                    <option value="sd">山东省</option>
+                    <option value="zj">浙江省</option>
+                </select>
+            </p >
+
+            <!-- 个人简介 -->
+            <p>
+                <textarea name="profile" 
+                         rows="8" 
+                         cols="40" 
+                         placeholder="我的爱好还有:" required="required">
+						 默认的文字
+                 
+                </textarea>
+            </p >
+
+            <!-- 按钮 -->
+            <p>
+                <input type="reset" value="重置" />
+                <input type="submit" value="提交" />
+            </p >
+        </form>
+    </fieldset>
+</body>
+</html>

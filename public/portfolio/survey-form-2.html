@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>调查小问卷</title>
+	</head>
+	<body>
+		首页  &gt;  我的作业 &gt;  第三次作业
+		<hr>
+		<h3>调查小问卷</h3>
+
+		<form action="#" method="get">
+			<p>
+				姓名：<input type="text" name="username" placeholder="请输入用户名">
+			</p >
+			<p>
+				密码：<input type="password" name="password" value="123">
+			</p >
+			<p>
+				性别：
+				<input type="radio" name="gender" value="male" id="male" checked>
+				<label for="male">
+					<img src="../../images/男生.png" alt="男生图标" width="32" height="32" title="男生">
+				</label>
+				
+				<input type="radio" name="gender" value="female" id="female">
+				<label for="female">
+					<img src="../../images/女生.png" alt="女生图标" width="32" height="32" title="女生">
+				</label>
+			</p >
+			<p>
+				爱好：
+				<label>
+					<input type="checkbox" name="hobby" value="read" checked>
+					<img src="../../images/看书.png" alt="看书图标" width="32" height="32" title="看书">
+				</label>
+				<label>
+					<input type="checkbox" name="hobby" value="game">
+					<img src="../../images/玩游戏.png" alt="游戏图标" width="32" height="32" title="玩游戏">
+				</label>
+				<label>
+					<input type="checkbox" name="hobby" value="run">
+					<img src="../../images/跑步.png" alt="跑步图标" width="32" height="32" title="跑步">
+				</label>
+			</p >
+				
+			<p>
+				头像：<img src="../../images/我的头像.png" alt="当前头像" width="38" height="38" title="我的个人头像"><input type="file" name="avatar">
+				
+			</p >
+			<p>
+				生日：<input type="date" name="birthday">
+			</p >
+			<p>
+				<input type="hidden" name="token" value="itsishu">
+			</p >
+			<p>
+				所在地：
+				<select name="province" multiple size="4">
+					<option value="bj" selected>北京市</option>
+					<option value="gd">广东省</option>
+					<option value="sc">四川省</option>
+					<option value="sd">山东省</option>
+					<option value="zj">浙江省</option>
+				</select>
+			</p >
+			<p>
+				<textarea name="profile" rows="10" cols="30" placeholder="我的爱好还有：">默认的文字</textarea>
+			</p >
+			<input type="reset" value="重置">
+			<input type="submit" value="提交">
+		</form>
+	</body>
+</html>

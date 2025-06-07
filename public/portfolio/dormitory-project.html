@@ -1,0 +1,2781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共创和谐宿舍</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mb-5 {
+            margin-bottom: 2rem;
+        }
+        
+        .mt-3 {
+            margin-top: 1rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+        
+        .mt-5 {
+            margin-top: 2rem;
+        }
+        
+        .py-3 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .py-5 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        
+        .px-4 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        
+        .d-flex {
+            display: flex;
+        }
+        
+        .flex-column {
+            flex-direction: column;
+        }
+        
+        .justify-content-between {
+            justify-content: space-between;
+        }
+        
+        .align-items-center {
+            align-items: center;
+        }
+        
+        .text-red {
+            color: #e53e3e;
+        }
+        
+        .text-white {
+            color: white;
+        }
+        
+        .bg-red {
+            background-color: #e53e3e;
+        }
+        
+        .bg-light {
+            background-color: #f8f9fa;
+        }
+        
+        .bg-white {
+            background-color: white;
+        }
+        
+        .rounded {
+            border-radius: 0.25rem;
+        }
+        
+        .shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c53030;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #e53e3e;
+            border: 1px solid #e53e3e;
+        }
+        
+        .btn-outline:hover {
+            background-color: #e53e3e;
+            color: white;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-logo img {
+            margin-right: 10px;
+        }
+        
+        .navbar-logo h1 {
+            font-size: 1.5rem;
+            color: #e53e3e;
+            margin: 0;
+        }
+        
+        .navbar-menu {
+            display: flex;
+        }
+        
+        .navbar-item {
+            position: relative;
+            margin-left: 1.5rem;
+        }
+        
+        .navbar-link {
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-link:hover {
+            color: #e53e3e;
+        }
+        
+        .navbar-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.25rem;
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .navbar-item:hover .navbar-dropdown {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #e53e3e;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        /* 页面内容样式 */
+        .page-content {
+            min-height: calc(100vh - 70px - 60px);
+            padding: 2rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #e53e3e;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            color: #e53e3e;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card-text {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        /* 网格系统 */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .col-md-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .col-md-3 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .col-md-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+            
+            .col-md-4 {
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
+            
+            .col-md-3 {
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            background: linear-gradient(to bottom, #fff1f1, #ffffff);
+            padding: 4rem 0;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            color: #e53e3e;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-text {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-img-container {
+            position: relative;
+            height: 400px;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 1.5rem;
+            color: white;
+        }
+        
+        /* 特色区块样式 */
+        .feature-box {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            color: #e53e3e;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-text {
+            color: #666;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            background-color: #e53e3e;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        /* 粒子背景 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* 问题阐述页面样式 */
+        .problem-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .problem-body {
+            padding: 2rem;
+        }
+        
+        .problem-title {
+            font-size: 1.5rem;
+            color: #e53e3e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .problem-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .problem-text {
+            margin-bottom: 1rem;
+        }
+        
+        .problem-list {
+            list-style: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .problem-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-box-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2b6cb0;
+        }
+        
+        /* 团员示范作用页面样式 */
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .example-item {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: #e53e3e;
+        }
+        
+        /* 带动策略页面样式 */
+        .strategy-box {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .strategy-title {
+            font-weight: 600;
+            color: #2b6cb0;
+            margin-bottom: 0.75rem;
+        }
+        
+        .strategy-list {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+        
+        .strategy-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 成果展示页面样式 */
+        .achievement-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+        
+        .achievement-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .achievement-subtitle {
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-info h4 {
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .testimonial-info p {
+            font-size: 0.875rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+        }
+        
+        /* 互动交流页面样式 */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #e53e3e;
+            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+        }
+        
+        .radio-group {
+            margin-bottom: 1rem;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .radio-input {
+            margin-right: 0.5rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background-color: #c53030;
+        }
+        
+        /* 分享经验页面样式 */
+        .experience-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .experience-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .experience-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        
+        .experience-info h4 {
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .experience-info p {
+            font-size: 0.875rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .experience-date {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .experience-content {
+            margin-bottom: 1rem;
+        }
+        
+        .experience-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 0.875rem;
+        }
+        
+        .experience-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .experience-action {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+        
+        .experience-action i {
+            margin-right: 0.25rem;
+        }
+        
+        /* 响应式样式 */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .navbar-menu.active {
+                display: flex;
+            }
+            
+            .navbar-item {
+                margin: 0;
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .navbar-dropdown {
+                position: static;
+                box-shadow: none;
+                display: none;
+                padding-left: 1.5rem;
+            }
+            
+            .navbar-item.active .navbar-dropdown {
+                display: block;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-img-container {
+                height: 300px;
+                margin-top: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+		.custom-audio-player {
+		            display: flex;
+		            align-items: center;
+		            gap: 10px;
+		            background-color: #fff;
+		            padding: 10px;
+		            border-radius: 10px;
+		            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <div class="navbar-logo">
+                <img src="images3/1.jpg" alt="团徽" width="90" height="90">
+                <img src="images3/2.jpg" alt="学校标志" width="180" height="50">
+                <h1>共创和谐宿舍</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li class="navbar-item">
+                    <a href="#home" class="navbar-link" onclick="showPage('home')">首页</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#problems" class="navbar-link" onclick="showPage('problems')">问题阐述</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">团员示范作用</a>
+                    <ul class="navbar-dropdown">
+                        <li class="dropdown-item">
+                            <a href="#self-discipline" onclick="showPage('self-discipline')">自身规范</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#communication" onclick="showPage('communication')">积极沟通</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">带动策略</a>
+                    <ul class="navbar-dropdown">
+                        <li class="dropdown-item">
+                            <a href="#education" onclick="showPage('education')">宣传教育</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#convention" onclick="showPage('convention')">共同制定公约</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#activities" onclick="showPage('activities')">组织活动</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navbar-item">
+                    <a href="#achievements" class="navbar-link" onclick="showPage('achievements')">成果展示</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="navbar-link">互动交流</a>
+                    <ul class="navbar-dropdown">
+                        <li class="dropdown-item">
+                            <a href="#feedback" onclick="showPage('feedback')">问题反馈</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#sharing" onclick="showPage('sharing')">经验分享</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 页面内容 -->
+    <div class="page-content">
+        <!-- 首页 -->
+        <div id="home" class="page active">
+            <!-- 英雄区域 -->
+            <section class="hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                           <div class="hero-content animate-fadeIn">
+                               <h2 class="hero-title">共创和谐宿舍</h2>
+                               <p class="hero-text">共同营造安全、和谐、温馨的宿舍环境，促进良好宿舍文化建设，提高宿舍生活质量。</p>
+                               <div class="d-flex">
+                                   <a href="#problems" class="btn btn-primary mr-3" onclick="showPage('problems')">了解宿舍问题</a>
+                                   <a href="#feedback" class="btn btn-outline ml-3" onclick="showPage('feedback')">问题反馈</a>
+                               </div>
+                               <audio src="video/闪耀 汪苏泷.mp3" controls="controls" loop="loop" 
+                                      style="border: 3px solid #ff6347; border-radius: 15px; padding: 15px; background-color: #fff; margin-top: 20px;">
+                               </audio>
+                           </div>
+
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="hero-img-container animate-fadeIn delay-2">
+                                <img src="images3/10.jpg" alt="整洁的宿舍环境" class="hero-img">
+                                <div class="hero-img-overlay">
+                                    <p>整洁有序的宿舍环境</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 特色区块 -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-4 animate-fadeIn delay-1">
+                            <div class="feature-box">
+                                <h3 class="feature-title">安全第一</h3>
+                                <p class="feature-text">了解宿舍安全隐患，避免使用大功率电器，共同维护宿舍安全。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 animate-fadeIn delay-2">
+                            <div class="feature-box">
+                                <h3 class="feature-title">和谐相处</h3>
+                                <p class="feature-text">尊重他人作息时间，保持适当音量，创造和谐的宿舍氛围。</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 animate-fadeIn delay-3">
+                            <div class="feature-box">
+                                <h3 class="feature-title">共同成长</h3>
+                                <p class="feature-text">通过宿舍活动和交流，增进友谊，共同进步，提升综合素质。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 主要内容板块 -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <h2 class="section-title">主要内容板块</h2>
+                    
+                    <div class="row">
+                        <div class="col-12 col-md-4 animate-fadeIn delay-1">
+                            <div class="card">
+                                <img src="images3/4.jpg" alt="宿舍常见问题" class="card-img">
+                                <div class="card-body">
+                                    <h3 class="card-title">问题阐述</h3>
+                                    <p class="card-text">详细介绍各类宿舍不良行为及其带来的负面影响，如大功率电器可能引发电路故障甚至火灾、大声喧哗影响他人休息等。</p>
+                                    <a href="#problems" class="btn btn-primary" onclick="showPage('problems')">了解更多</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 animate-fadeIn delay-2">
+                            <div class="card">
+                                <img src="images3/9.jpg" alt="团员示范作用" class="card-img">
+                                <div class="card-body">
+                                    <h3 class="card-title">团员示范作用</h3>
+                                    <p class="card-text">阐述团员应如何以身作则，严格遵守宿舍规定，从不使用大功率电器、按时熄灯等方面进行自我约束，为室友树立榜样。</p>
+                                    <a href="#self-discipline" class="btn btn-primary" onclick="showPage('self-discipline')">了解更多</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 animate-fadeIn delay-3">
+                            <div class="card">
+                                <img src="images3/7.jpg" alt="带动策略" class="card-img">
+                                <div class="card-body">
+                                    <h3 class="card-title">带动策略</h3>
+                                    <p class="card-text">分享组织宿舍内部宣传活动的方法，如制作主题海报、举办主题班会等，普及宿舍规定和良好行为习惯的重要性。</p>
+                                    <a href="#education" class="btn btn-primary" onclick="showPage('education')">了解更多</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-5">
+                        <a href="#achievements" class="btn btn-primary" onclick="showPage('achievements')">查看成果展示</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 互动交流 -->
+            <section class="py-5">
+                <div class="container">
+                    <h2 class="section-title">互动交流</h2>
+                    
+                    <div class="row">
+                        <div class="col-12 col-md-6 animate-fadeIn delay-1">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">问题反馈</h3>
+                                    <p class="card-text">发现宿舍问题？有改进建议？请通过我们的反馈表单告诉我们，我们会认真对待每一条反馈。</p>
+                                    <a href="#feedback" class="btn btn-primary" onclick="showPage('feedback')">前往反馈</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 animate-fadeIn delay-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">经验分享</h3>
+                                    <p class="card-text">分享你在营造和谐宿舍环境方面的经验和心得，帮助更多同学创建美好的宿舍生活。</p>
+                                    <a href="#sharing" class="btn btn-primary" onclick="showPage('sharing')">分享经验</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- 问题阐述页面 -->
+        <div id="problems" class="page">
+            <div class="container">
+                <h2 class="section-title">宿舍常见问题阐述</h2>
+                <p class="section-description">了解宿舍中常见的不良行为及其带来的负面影响，共同维护宿舍安全与和谐</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <img src="images3/4.jpg" alt="大功率电器使用问题" class="problem-img">
+                    <div class="problem-body">
+                        <h3 class="problem-title">大功率电器使用问题</h3>
+                        <p class="problem-subtitle">大功率电器使用可能导致严重的安全隐患</p>
+                        
+                        <p class="problem-text">大功率电器（如电吹风、电热毯、小火锅等）可能对宿舍电路安全造成严重危害。宿舍电路设计通常只能承受有限的电流负荷，当使用大功率电器时，容易导致以下问题：</p>
+                        
+                        <ul class="problem-list">
+                            <li>电路过载，导致电线发热，增加火灾风险</li>
+                            <li>频繁跳闸，影响整个宿舍甚至整层楼的用电</li>
+                            <li>电器短路，可能引发火灾</li>
+                            <li>增加触电风险</li>
+                        </ul>
+                        
+                        <p class="problem-text">学校明确规定禁止在宿舍使用大功率电器，违反规定不仅会受到处分，更可能危及自身和他人的生命安全。</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-4">
+                                <div class="info-box">
+                                    <p class="info-box-title">电热毯</p>
+                                    <p>800-1500W</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="info-box">
+                                    <p class="info-box-title">电吹风</p>
+                                    <p>1000-2000W</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="info-box">
+                                    <p class="info-box-title">电热水壶</p>
+                                    <p>1500-2200W</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <img src="images3/3.jpg" alt="宿舍内使用电器的混乱场景" class="problem-img">
+                    <div class="problem-body">
+                        <h3 class="problem-title">熄灯时间问题</h3>
+                        <p class="problem-subtitle">不遵守熄灯时间会影响他人休息和作息规律</p>
+                        
+                        <p class="problem-text">超过规定熄灯时间不休息会给他人带来诸多不便：</p>
+                        
+                        <ul class="problem-list">
+                            <li>影响室友的正常休息，导致睡眠质量下降</li>
+                            <li>打乱宿舍整体作息规律，影响第二天的学习状态</li>
+                            <li>容易引发宿舍矛盾，破坏和谐氛围</li>
+                            <li>长期熬夜对自身健康也有严重危害</li>
+                        </ul>
+                        
+                        <p class="problem-text">学校规定的熄灯时间是经过科学安排的，遵守熄灯时间不仅是对他人的尊重，也是对自己健康的负责。建议同学们养成良好的作息习惯，按时休息。</p>
+                        
+                        <div class="info-box">
+                            <p class="info-box-title">学校熄灯时间规定</p>
+                            <p>周日至周四：晚上 11:00 熄灯</p>
+                            <p>周五至周六：晚上 12:00 熄灯</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-2">
+                    <div class="problem-img" style="background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                        <div style="font-size: 4rem; animation: pulse 2s infinite;">🔊 → 🔇</div>
+                    </div>
+                    <div class="problem-body">
+                        <h3 class="problem-title">大声喧哗与外放声音问题</h3>
+                        <p class="problem-subtitle">噪音污染会严重影响他人的学习和休息</p>
+                        
+                        <p class="problem-text">在宿舍内大声喧哗、外放音乐等行为会对周围同学造成严重干扰：</p>
+                        
+                        <ul class="problem-list">
+                            <li>干扰他人学习，降低学习效率</li>
+                            <li>影响他人休息，导致睡眠不足</li>
+                            <li>容易引发宿舍矛盾和冲突</li>
+                            <li>长期噪音环境会导致心理压力增加</li>
+                        </ul>
+                        
+                        <p class="problem-text">案例：某宿舍因一名同学经常在深夜大声打游戏，导致室友无法正常休息，最终引发严重冲突，不得不申请调换宿舍。这不仅破坏了宿舍和谐氛围，也给学校管理带来了额外负担。</p>
+                        
+                        <div class="info-box" style="background-color: #f0fff4;">
+                            <p class="info-box-title" style="color: #38a169;">建议做法</p>
+                            <ul class="problem-list">
+                                <li>使用耳机听音乐或观看视频</li>
+                                <li>控制说话音量，特别是在他人休息时</li>
+                                <li>打电话时注意场合和音量</li>
+                                <li>尊重"安静时间"：晚上10点后和中午休息时间</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-3">
+                    <img src="images3/6.jpg" alt="宿舍常见的违禁品" class="problem-img">
+                    <div class="problem-body">
+                        <h3 class="problem-title">其他安全隐患</h3>
+                        <p class="problem-subtitle">明火和易燃物品在宿舍内存放和使用的危险</p>
+                        
+                        <p class="problem-text">除了大功率电器外，以下物品在宿舍内同样存在严重安全隐患：</p>
+                        
+                        <ul class="problem-list">
+                            <li>明火器具：蜡烛、酒精炉、煤油炉等</li>
+                            <li>易燃物品：打火机、火柴、汽油等</li>
+                            <li>易爆物品：烟花爆竹等</li>
+                            <li>煤气罐、液化气罐等压力容器</li>
+                        </ul>
+                        
+                        <p class="problem-text">这些物品在宿舍内使用或存放都可能引发火灾或爆炸事故，造成人员伤亡和财产损失。学校明令禁止在宿舍内存放和使用这些物品。</p>
+                        
+                        <div class="info-box" style="background-color: #fffbeb;">
+                            <p class="info-box-title" style="color: #d97706;">温馨提示</p>
+                            <p>如发现宿舍内有以上违禁物品，请及时向宿管老师或辅导员报告，共同维护宿舍安全。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 自身规范页面 -->
+        <div id="self-discipline" class="page">
+            <div class="container">
+                <h2 class="section-title">团员自身规范</h2>
+                <p class="section-description">团员应以身作则，严格遵守宿舍规定，为室友树立良好榜样</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">作息规律</h3>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="problem-text">团员应带头遵守学校作息时间，养成规律的作息习惯：</p>
+                                
+                                <ul class="problem-list">
+                                    <li>按时起床，不睡懒觉</li>
+                                    <li>按时熄灯休息，不熬夜</li>
+                                    <li>午休时间保持安静</li>
+                                    <li>尊重他人休息时间</li>
+                                </ul>
+                                
+                                <div class="info-box">
+                                    <p class="info-box-title">示范作息时间表</p>
+                                    <p>6:30 - 起床</p>
+                                    <p>7:00 - 早餐</p>
+                                    <p>12:00-13:30 - 午休</p>
+                                    <p>22:30 - 准备休息</p>
+                                    <p>23:00 - 熄灯就寝</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <img src="images3/10.jpg" alt="整洁的宿舍环境" style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">卫生习惯</h3>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <img src="images3/9.jpg" alt="整洁的宿舍环境" style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p class="problem-text">团员应保持良好的卫生习惯，维护宿舍整洁：</p>
+                                
+                                <ul class="problem-list">
+                                    <li>每天整理个人床铺和物品</li>
+                                    <li>按时完成值日任务</li>
+                                    <li>保持公共区域整洁</li>
+                                    <li>垃圾分类并及时清理</li>
+                                    <li>定期大扫除，彻底清洁宿舍</li>
+                                </ul>
+                                
+                                <div class="info-box" style="background-color: #f0fff4;">
+                                    <p class="info-box-title" style="color: #38a169;">卫生检查标准</p>
+                                    <ul class="problem-list">
+                                        <li>地面无杂物、无灰尘</li>
+                                        <li>床铺整齐，被子叠放规整</li>
+                                        <li>桌面物品摆放有序</li>
+                                        <li>垃圾桶定时清理，不溢满</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-2">
+                    <div class="problem-body">
+                        <h3 class="problem-title">文明行为</h3>
+                        
+                        <p class="problem-text">团员在宿舍内应言行文明，尊重他人：</p>
+                        
+                        <ul class="problem-list">
+                            <li>使用文明用语，不说脏话</li>
+                            <li>尊重他人隐私和个人空间</li>
+                            <li>借用他人物品需征得同意</li>
+                            <li>控制音量，不打扰他人</li>
+                            <li>遵守宿舍公约和规定</li>
+                        </ul>
+                        
+                        <div class="info-box" style="background-color: #fffbeb;">
+                            <p class="info-box-title" style="color: #d97706;">文明行为小故事</p>
+                            <p class="problem-text" style="font-style: italic;">
+                                "小李发现室友小张最近学习压力大，经常熬夜。他没有指责小张影响宿舍作息，而是主动关心小张的学习情况，帮助他制定更合理的学习计划，并提醒他注意休息。在小李的帮助下，小张逐渐调整了作息，学习效率也提高了。这种互相理解、互相帮助的行为，正是宿舍文明的体现。"
+                            </p>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-item">
+                                <p class="example-title">互相尊重</p>
+                            </div>
+                            <div class="example-item" style="background-color: #ebf8ff;">
+                                <p class="example-title" style="color: #3182ce;">诚实守信</p>
+                            </div>
+                            <div class="example-item" style="background-color: #f0fff4;">
+                                <p class="example-title" style="color: #38a169;">团结友爱</p>
+                            </div>
+                            <div class="example-item" style="background-color: #fffbeb;">
+                                <p class="example-title" style="color: #d97706;">乐于助人</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-3">
+                    <div class="problem-body">
+                        <h3 class="problem-title">电器使用规范</h3>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="problem-text">团员应严格遵守电器使用规范，确保宿舍安全：</p>
+                                
+                                <ul class="problem-list">
+                                    <li>不使用大功率电器</li>
+                                    <li>不私拉电线、不使用劣质充电器</li>
+                                    <li>离开宿舍时关闭所有电器</li>
+                                    <li>发现电器隐患及时报修</li>
+                                    <li>正确使用允许的电器设备</li>
+                                </ul>
+                                
+                                <div class="info-box" style="background-color: #fff5f5;">
+                                    <p class="info-box-title" style="color: #e53e3e;">禁止使用的电器</p>
+                                    <p>电热毯、电吹风、电热水壶、电饭煲、电磁炉、电热杯、电熨斗等大功率电器</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <img src="images3/5.jpg" alt="宿舍常见的违禁电器" style="width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 积极沟通页面 -->
+        <div id="communication" class="page">
+            <div class="container">
+                <h2 class="section-title">积极沟通</h2>
+                <p class="section-description">团员应主动与室友沟通，以友好、理解的态度提醒室友，促进相互理解和尊重</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">沟通技巧</h3>
+                        
+                        <p class="problem-text">与室友沟通时，应注意以下技巧：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #ebf8ff;">
+                                    <h4 class="strategy-title" style="color: #3182ce;">选择合适的时机</h4>
+                                    <ul class="strategy-list">
+                                        <li>避开对方情绪波动或疲惫的时候</li>
+                                        <li>选择相对轻松、私密的环境</li>
+                                        <li>避免在公共场合当众指出问题</li>
+                                        <li>预留充足的沟通时间</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #f0fff4;">
+                                    <h4 class="strategy-title" style="color: #38a169;">保持友善态度</h4>
+                                    <ul class="strategy-list">
+                                        <li>使用"我"陈述句，而非指责性语言</li>
+                                        <li>语气平和，避免情绪化</li>
+                                        <li>表达关心和理解</li>
+                                        <li>注意肢体语言和表情</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #fffbeb;">
+                                    <h4 class="strategy-title" style="color: #d97706;">倾听对方意见</h4>
+                                    <ul class="strategy-list">
+                                        <li>给予对方充分表达的机会</li>
+                                        <li>认真倾听，不打断</li>
+                                        <li>尝试理解对方的立场和感受</li>
+                                        <li>适当提问，确认理解</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #faf5ff;">
+                                    <h4 class="strategy-title" style="color: #805ad5;">寻求共识解决</h4>
+                                    <ul class="strategy-list">
+                                        <li>共同探讨解决方案</li>
+                                        <li>寻找双方都能接受的妥协点</li>
+                                        <li>明确后续行动计划</li>
+                                        <li>表达感谢和期待</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #fff5f5;">
+                            <h4 class="strategy-title" style="color: #e53e3e;">沟通示例：发现室友使用大功率电器</h4>
+                            <div>
+                                <p class="mb-2" style="font-weight: 500;">❌ 不恰当的方式：</p>
+                                <p class="mb-3" style="font-style: italic;">
+                                    "你怎么又在用电热毯？学校明令禁止的，你是不是想害死我们？赶紧给我关了！"
+                                </p>
+                                
+                                <p class="mb-2" style="font-weight: 500;">✅ 恰当的方式：</p>
+                                <p style="font-style: italic;">
+                                    "嗨，我注意到你在用电热毯。我理解天气冷想保暖的心情，但我有点担心宿舍的电路负荷和安全问题。学校之前有通知说这类电器功率太大，容易引发火灾。我们可以一起想想有没有其他保暖的方法，比如加厚被子或者热水袋？"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">沟通案例分享</h3>
+                        
+                        <div class="achievement-card">
+                            <h4 class="achievement-title">案例一：解决熄灯时间冲突</h4>
+                            
+                            <p class="achievement-subtitle">背景：</p>
+                            <p>小王是团员，发现室友小李经常在熄灯后仍开台灯学习到凌晨，影响其他室友休息。</p>
+                            
+                            <p class="achievement-subtitle">沟通过程：</p>
+                            <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                <li>小王选择在周末下午，宿舍只有他和小李在场时进行沟通。</li>
+                                <li>小王先肯定了小李学习刻苦的精神，表示理解和敬佩。</li>
+                                <li>小王坦诚地表达了自己和其他室友因为灯光而难以入睡的困扰。</li>
+                                <li>小王询问小李是否有特殊原因需要熬夜学习。</li>
+                                <li>小李解释自己最近课业压力大，需要额外时间复习。</li>
+                                <li>小王建议小李可以使用图书馆或自习室的晚间开放时间，或者使用小功率的阅读灯并加屏障减少光线干扰。</li>
+                            </ol>
+                            
+                            <p class="achievement-subtitle">解决结果：</p>
+                            <p>小李理解了自己的行为对室友的影响，决定调整学习计划，提前开始学习，并在熄灯后如确实需要继续，就去24小时自习室。宿舍氛围明显改善，大家都能按时休息。</p>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <h4 class="achievement-title">案例二：解决卫生问题</h4>
+                            
+                            <p class="achievement-subtitle">背景：</p>
+                            <p>小张是团员，注意到室友小陈经常不做值日，宿舍卫生区域经常不干净。</p>
+                            
+                            <p class="achievement-subtitle">沟通过程：</p>
+                            <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                <li>小张邀请小陈一起吃晚饭，在轻松的氛围中聊天。</li>
+                                <li>小张提到最近宿舍卫生检查的情况，询问小陈是否注意到。</li>
+                                <li>小张表达了对整洁环境的期望，以及大家共同维护的重要性。</li>
+                                <li>小陈坦言自己课程安排紧张，有时忘记值日。</li>
+                                <li>小张建议制作值日提醒表，并提出可以互相提醒和帮助。</li>
+                                <li>小张还提议可以调整值日时间，以适应小陈的课程安排。</li>
+                            </ol>
+                            
+                            <p class="achievement-subtitle">解决结果：</p>
+                            <p>小陈认识到自己的疏忽，承诺会更加注意。宿舍成员共同制作了值日提醒表，并建立了互助机制。宿舍卫生状况明显改善，还在月度卫生评比中获得了优秀宿舍称号。</p>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <h4 class="achievement-title">案例三：解决噪音问题</h4>
+                            
+                            <p class="achievement-subtitle">背景：</p>
+                            <p>小刘是团员，发现室友小赵经常在宿舍打游戏时大声喊叫，影响其他人学习和休息。</p>
+                            
+                            <p class="achievement-subtitle">沟通过程：</p>
+                            <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                <li>小刘选择在小赵没有打游戏的时候，单独与他交流。</li>
+                                <li>小刘先表示理解游戏时情绪激动的情况，自己也有类似经历。</li>
+                                <li>小刘坦诚地表达了噪音对宿舍其他成员学习和休息的影响。</li>
+                                <li>小刘询问小赵是否意识到自己声音较大。</li>
+                                <li>小赵表示游戏时太投入，没有注意到音量问题。</li>
+                                <li>小刘建议使用耳机，或者在公共休息区域玩游戏，以及控制游戏时间。</li>
+                            </ol>
+                            
+                            <p class="achievement-subtitle">解决结果：</p>
+                            <p>小赵理解了自己行为的影响，承诺使用耳机并控制情绪。宿舍还约定了"安静时间"，在这段时间内保持安静以便大家学习。宿舍氛围更加和谐，大家都能专注学习。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 宣传教育页面 -->
+        <div id="education" class="page">
+            <div class="container">
+                <h2 class="section-title">宣传教育</h2>
+                <p class="section-description">通过多种形式的宣传教育活动，普及宿舍规定和良好行为习惯的重要性</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">制作海报</h3>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="problem-text">制作宿舍文明海报是宣传教育的有效方式，可以直观地展示宿舍规定和安全提示：</p>
+                                
+                                <ul class="problem-list">
+                                    <li>海报内容可包括宿舍规定、安全提示、文明行为标语等</li>
+                                    <li>设计应简洁明了，图文并茂</li>
+                                    <li>使用醒目的色彩和字体</li>
+                                    <li>放置在宿舍显眼位置或公共区域</li>
+                                </ul>
+                                
+                                <div class="info-box">
+                                    <p class="info-box-title">海报主题建议</p>
+                                    <ul class="problem-list">
+                                        <li>《宿舍禁用电器一览表》</li>
+                                        <li>《宿舍防火安全指南》</li>
+                                        <li>《文明宿舍行为准则》</li>
+                                        <li>《宿舍作息时间表》</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <img src="images3/8.jpg" alt="宿舍禁用电器海报" style="width: 100%; height: auto; object-fit: cover; border-radius: 0.5rem;">
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">海报设计步骤</h4>
+                        <div class="example-grid">
+                            <div class="example-item">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">1</div>
+                                <p>确定主题和目标受众</p>
+                            </div>
+                            <div class="example-item">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">2</div>
+                                <p>收集相关资料和图片</p>
+                            </div>
+                            <div class="example-item">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">3</div>
+                                <p>设计海报布局和内容</p>
+                            </div>
+                            <div class="example-item">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">4</div>
+                                <p>制作并打印海报</p>
+                            </div>
+                            <div class="example-item">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">5</div>
+                                <p>在宿舍内张贴展示</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">主题班会</h3>
+                        
+                        <p class="problem-text">举办宿舍文明主题班会是深入宣传教育的有效方式，可以通过互动讨论增强同学们的参与感和认同感：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">班会主题建议</h4>
+                                <ul class="problem-list">
+                                    <li>《宿舍安全与防火知识》</li>
+                                    <li>《如何创建和谐宿舍环境》</li>
+                                    <li>《宿舍文明行为与个人修养》</li>
+                                    <li>《宿舍矛盾处理与沟通技巧》</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">班会形式建议</h4>
+                                <ul class="problem-list">
+                                    <li>专题讲座：邀请宿管老师或辅导员讲解</li>
+                                    <li>案例分析：分析真实宿舍问题案例</li>
+                                    <li>小组讨论：分组讨论并分享观点</li>
+                                    <li>角色扮演：模拟宿舍冲突场景并解决</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #fffbeb;">
+                            <h4 class="strategy-title" style="color: #d97706;">主题班会组织流程</h4>
+                            <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                <li>确定班会主题和目标</li>
+                                <li>准备相关资料和材料</li>
+                                <li>设计班会流程和互动环节</li>
+                                <li>邀请相关人员参与</li>
+                                <li>布置班会场地</li>
+                                <li>开展班会活动</li>
+                                <li>总结班会成果并跟进落实</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #f0fff4;">
+                            <h4 class="strategy-title" style="color: #38a169;">成功案例分享</h4>
+                            <p style="font-style: italic;">
+                                "计算机科学学院2023级3班举办了'宿舍安全与防火知识'主题班会，邀请了学校保卫处的老师进行专业讲解，并组织了灭火器使用演示和火灾逃生演练。班会结束后，同学们纷纷表示受益匪浅，宿舍内的违规电器使用现象明显减少，安全意识显著提高。"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-2">
+                    <div class="problem-body">
+                        <h3 class="problem-title">线上宣传</h3>
+                        
+                        <p class="problem-text">利用社交媒体平台和校园网络资源开展线上宣传，扩大宣传范围和影响力：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">线上宣传渠道</h4>
+                                <ul class="problem-list">
+                                    <li>学校官方微信公众号</li>
+                                    <li>班级/学院微信群</li>
+                                    <li>校园论坛和BBS</li>
+                                    <li>短视频平台</li>
+                                    <li>学校官网</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">线上宣传内容形式</h4>
+                                <ul class="problem-list">
+                                    <li>图文推送：制作精美的宣传图文</li>
+                                    <li>短视频：拍摄宿舍安全知识短视频</li>
+                                    <li>在线问答：组织宿舍安全知识问答</li>
+                                    <li>网络投票：评选文明宿舍和个人</li>
+                                    <li>线上展示：展示优秀宿舍风采</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #ebf8ff;">
+                                    <h4 class="strategy-title" style="color: #3182ce;">微信推文主题</h4>
+                                    <ul class="problem-list">
+                                        <li>《宿舍安全隐患大排查》</li>
+                                        <li>《宿舍文明行为倡议书》</li>
+                                        <li>《优秀宿舍风采展示》</li>
+                                        <li>《宿舍安全小知识》</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #faf5ff;">
+                                    <h4 class="strategy-title" style="color: #805ad5;">短视频创意</h4>
+                                    <ul class="problem-list">
+                                        <li>《宿舍安全隐患大揭秘》</li>
+                                        <li>《一分钟学会宿舍防火》</li>
+                                        <li>《宿舍文明行为大挑战》</li>
+                                        <li>《宿舍生活小妙招》</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #fff5f5;">
+                                    <h4 class="strategy-title" style="color: #e53e3e;">线上活动</h4>
+                                    <ul class="problem-list">
+                                        <li>《宿舍安全知识竞赛》</li>
+                                        <li>《最美宿舍评选》</li>
+                                        <li>《宿舍故事征文比赛》</li>
+                                        <li>《宿舍改造创意大赛》</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <img src="images3/7.jpg" alt="宿舍安全宣传图" style="width: 100%; height: 70%; object-fit: contain; border-radius: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 共同制定公约页面 -->
+        <div id="convention" class="page">
+            <div class="container">
+                <h2 class="section-title">共同制定公约</h2>
+                <p class="section-description">组织室友共同讨论并制定宿舍公约，明确各项规定和奖惩措施，增强室友自觉遵守规定的意识</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">组织讨论</h3>
+                        
+                        <p class="problem-text">组织室友共同讨论宿舍公约是制定公约的第一步，也是最重要的一步：</p>
+                        
+                        <div class="strategy-box" style="background-color: #ebf8ff;">
+                            <h4 class="strategy-title" style="color: #3182ce;">讨论准备工作</h4>
+                            <ul class="problem-list">
+                                <li>选择所有室友都有空的时间，确保每位室友都能参与</li>
+                                <li>提前通知讨论的主题和目的，让室友有思考的时间</li>
+                                <li>准备纸笔或电子设备记录讨论内容</li>
+                                <li>营造轻松、开放的讨论氛围</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #f0fff4;">
+                            <h4 class="strategy-title" style="color: #38a169;">讨论流程建议</h4>
+                            <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                <li>说明讨论目的：创建和谐宿舍环境，预防和解决可能的问题</li>
+                                <li>头脑风暴：每位室友分享自己认为需要纳入公约的内容</li>
+                                <li>分类整理：将提出的内容按类别整理（如作息时间、卫生值日、电器使用等）</li>
+                                <li>逐条讨论：对每一条内容进行讨论，听取不同意见</li>
+                                <li>达成共识：对有争议的内容进行协商，直到达成一致</li>
+                                <li>制定奖惩措施：讨论违反公约的后果和遵守公约的奖励</li>
+                                <li>总结确认：复述最终达成的公约内容，确保所有人理解和接受</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #fffbeb;">
+                            <h4 class="strategy-title" style="color: #d97706;">讨论注意事项</h4>
+                            <ul class="problem-list">
+                                <li>确保每位室友都有发言的机会</li>
+                                <li>尊重不同意见，避免争吵</li>
+                                <li>关注实际问题，制定切实可行的规定</li>
+                                <li>考虑每位室友的特殊情况和需求</li>
+                                <li>公约内容应符合学校规定和法律法规</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">公约内容</h3>
+                        
+                        <p class="problem-text">宿舍公约应涵盖宿舍生活的各个方面，以下是常见的公约内容范例：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #fff5f5;">
+                                    <h4 class="strategy-title" style="color: #e53e3e;">作息时间</h4>
+                                    <ul class="problem-list">
+                                        <li>熄灯时间：周日至周四23:00，周五至周六23:30</li>
+                                        <li>起床时间：不得晚于8:00（周末可适当延长）</li>
+                                        <li>午休时间：12:30-14:00保持安静</li>
+                                        <li>夜间活动：22:00后控制音量，不影响他人休息</li>
+                                        <li>特殊情况：需要熬夜学习的，使用小台灯并征得室友同意</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #ebf8ff;">
+                                    <h4 class="strategy-title" style="color: #3182ce;">卫生值日</h4>
+                                    <ul class="problem-list">
+                                        <li>值日安排：每人每周负责一天宿舍卫生</li>
+                                        <li>值日内容：清扫地面、整理公共区域、倒垃圾</li>
+                                        <li>个人区域：每人保持自己床铺和桌面整洁</li>
+                                        <li>大扫除：每月进行一次宿舍大扫除</li>
+                                        <li>临时调换：如有特殊情况需提前协商调换</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #f0fff4;">
+                                    <h4 class="strategy-title" style="color: #38a169;">电器使用</h4>
+                                    <ul class="problem-list">
+                                        <li>禁止使用：大功率电器（电热毯、电吹风等）</li>
+                                        <li>公共电器：使用后及时关闭，节约用电</li>
+                                        <li>充电安全：不过夜充电，不使用劣质充电器</li>
+                                        <li>离开宿舍：最后离开者检查并关闭所有电器</li>
+                                        <li>发现隐患：及时报告并处理电器安全隐患</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #faf5ff;">
+                                    <h4 class="strategy-title" style="color: #805ad5;">来访登记</h4>
+                                    <ul class="problem-list">
+                                        <li>来访通知：提前告知室友有客人来访</li>
+                                        <li>来访时间：来访时间不超过22:00</li>
+                                        <li>异性来访：遵守学校关于异性来访的规定</li>
+                                        <li>来访行为：来访者应遵守宿舍规定</li>
+                                        <li>特殊情况：如需留宿亲友，须征得所有室友同意并报宿管批准</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #fffbeb;">
+                                    <h4 class="strategy-title" style="color: #d97706;">噪音控制</h4>
+                                    <ul class="problem-list">
+                                        <li>音乐播放：使用耳机或控制音量</li>
+                                        <li>通话音量：控制通话音量，避免大声喧哗</li>
+                                        <li>安静时间：22:00-8:00和午休时间为安静时间</li>
+                                        <li>游戏活动：控制情绪，避免大声喊叫</li>
+                                        <li>提醒机制：室友可以友善提醒噪音问题</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #fff5f7;">
+                                    <h4 class="strategy-title" style="color: #d53f8c;">物品摆放</h4>
+                                    <ul class="problem-list">
+                                        <li>个人区域：物品整齐摆放，不超出个人区域</li>
+                                        <li>公共区域：保持整洁，不随意堆放物品</li>
+                                        <li>贵重物品：妥善保管，避免丢失</li>
+                                        <li>借用规则：借用他人物品须征得同意</li>
+                                        <li>废弃物品：及时清理，不占用公共空间</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-2">
+                    <div class="problem-body">
+                        <h3 class="problem-title">监督与奖惩</h3>
+                        
+                        <p class="problem-text">建立有效的监督和奖惩机制，确保宿舍公约得到切实执行：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">监督机制</h4>
+                                <ul class="problem-list">
+                                    <li>值日生制度：轮流担任值日生，负责监督公约执行</li>
+                                    <li>定期检查：每周进行一次公约执行情况检查</li>
+                                    <li>问题记录：记录违反公约的情况，定期讨论</li>
+                                    <li>互相提醒：室友间友善提醒，避免冲突</li>
+                                    <li>定期评估：每月评估公约执行效果，必要时调整</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">奖惩措施</h4>
+                                <ul class="problem-list">
+                                    <li>积分制度：遵守公约加分，违反公约扣分</li>
+                                    <li>额外值日：违反公约者承担额外的值日任务</li>
+                                    <li>小额罚款：设立宿舍基金，违反公约者缴纳小额罚款</li>
+                                    <li>集体奖励：全体遵守公约良好时，组织集体活动</li>
+                                    <li>表彰激励：定期评选"宿舍之星"，给予表彰</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #ebf8ff;">
+                            <h4 class="strategy-title" style="color: #3182ce;">公约执行案例</h4>
+                            <p style="font-style: italic; margin-bottom: 1rem;">
+                                "某宿舍制定了详细的公约，并建立了积分制度。每位室友初始有100分，遵守公约加分，违反公约扣分。月底分数最高者获得'宿舍之星'称号，可免做一周值日；分数最低者需承担额外的公共区域清洁任务。这一机制实施后，宿舍环境明显改善，室友们更加自觉遵守公约。"
+                            </p>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div style="background-color: white; padding: 1rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">加分项</h5>
+                                        <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                            <li>+5分：主动承担额外清洁任务</li>
+                                            <li>+3分：提前完成值日工作</li>
+                                            <li>+2分：帮助室友解决问题</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div style="background-color: white; padding: 1rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">扣分项</h5>
+                                        <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                            <li>-5分：使用违禁电器</li>
+                                            <li>-3分：未完成值日任务</li>
+                                            <li>-2分：熄灯后大声喧哗</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 组织活动页面 -->
+        <div id="activities" class="page">
+            <div class="container">
+                <h2 class="section-title">组织活动</h2>
+                <p class="section-description">通过组织各类宿舍活动，增进室友之间的感情和凝聚力，同时融入良好行为倡导元素</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">体育活动</h3>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p class="problem-text">组织宿舍体育活动，不仅能增强身体素质，还能培养团队合作精神：</p>
+                                
+                                <ul class="problem-list">
+                                    <li>篮球比赛：组织宿舍篮球队，参加院系比赛</li>
+                                    <li>羽毛球活动：定期组织室友打羽毛球</li>
+                                    <li>晨跑活动：组织晨跑小组，养成良好作息</li>
+                                    <li>健身打卡：相互监督，共同健身</li>
+                                    <li>趣味运动会：组织宿舍趣味运动比赛</li>
+                                </ul>
+                                
+                                <div class="info-box">
+                                    <p class="info-box-title">活动组织步骤</p>
+                                    <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                        <li>确定活动项目和时间</li>
+                                        <li>征集参与意愿，组建团队</li>
+                                        <li>准备场地和器材</li>
+                                        <li>制定活动规则</li>
+                                        <li>开展活动并记录精彩瞬间</li>
+                                        <li>活动后总结分享</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 0.5rem;">
+                                    <h4 style="font-weight: 600; margin-bottom: 1rem; text-align: center;">宿舍篮球赛案例</h4>
+                                    <p style="font-style: italic; margin-bottom: 1rem;">
+                                        "计算机学院2023级3宿舍组织了一场'宿舍友谊杯'篮球赛，邀请了同层的几个宿舍参加。比赛前，大家共同制定了比赛规则，强调友谊第一、比赛第二的原则。比赛过程中，队员们相互鼓励，展现了良好的团队合作精神。比赛结束后，各宿舍成员一起聚餐，分享比赛感受，增进了彼此友谊。这次活动不仅锻炼了身体，还增强了宿舍凝聚力。"
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div style="background-color: white; padding: 0.75rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">活动收获</h5>
+                                                <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                                    <li>增强体质</li>
+                                                    <li>培养团队精神</li>
+                                                    <li>增进宿舍友谊</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div style="background-color: white; padding: 0.75rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                                <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">活动反思</h5>
+                                                <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                                    <li>活动前充分准备</li>
+                                                    <li>注意安全防护</li>
+                                                    <li>兼顾不同兴趣</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">文化活动</h3>
+                        
+                        <p class="problem-text">组织宿舍文化活动，丰富宿舍文化生活，促进室友之间的交流与合作：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #fffbeb;">
+                                    <h4 class="strategy-title" style="color: #d97706;">读书分享会</h4>
+                                    <p style="margin-bottom: 0.75rem;">每月选择一本好书，大家共同阅读，然后组织一次读书分享会，交流读书心得和感悟。</p>
+                                    <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                        <li>培养阅读习惯</li>
+                                        <li>拓展知识视野</li>
+                                        <li>锻炼表达能力</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #f0fff4;">
+                                    <h4 class="strategy-title" style="color: #38a169;">电影放映会</h4>
+                                    <p style="margin-bottom: 0.75rem;">定期组织宿舍电影放映会，选择积极向上的影片，观影后进行讨论和分享。</p>
+                                    <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                        <li>放松心情</li>
+                                        <li>增进交流</li>
+                                        <li>培养审美</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="strategy-box" style="background-color: #ebf8ff;">
+                                    <h4 class="strategy-title" style="color: #3182ce;">手工制作</h4>
+                                    <p style="margin-bottom: 0.75rem;">组织宿舍手工制作活动，如折纸、剪纸、DIY宿舍装饰品等，共同美化宿舍环境。</p>
+                                    <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                        <li>培养动手能力</li>
+                                        <li>美化宿舍环境</li>
+                                        <li>增强创造力</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #faf5ff;">
+                                    <h4 class="strategy-title" style="color: #805ad5;">主题晚会</h4>
+                                    <p style="margin-bottom: 0.75rem;">组织宿舍主题晚会，如生日会、节日庆祝、学期总结会等，增进室友感情。</p>
+                                    <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                        <li>庆祝特殊时刻</li>
+                                        <li>增进室友感情</li>
+                                        <li>创造美好回忆</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="strategy-box" style="background-color: #fff5f5;">
+                                    <h4 class="strategy-title" style="color: #e53e3e;">技能分享会</h4>
+                                    <p style="margin-bottom: 0.75rem;">每位室友分享自己的特长或技能，如摄影、绘画、编程、烹饪等，互相学习和交流。</p>
+                                    <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                        <li>展示个人特长</li>
+                                        <li>互相学习新技能</li>
+                                        <li>发现室友新面貌</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #f8f9fa;">
+                            <h4 class="strategy-title" style="color: #4a5568;">文化活动案例分享</h4>
+                            <p style="font-style: italic;">
+                                "外语学院2022级5宿舍组织了一次'宿舍文化之夜'活动，每位室友准备了一个节目，有朗诵、歌唱、乐器演奏、舞蹈等。活动中，大家发现了许多室友平时不为人知的才艺，相互欣赏和鼓励。活动结束后，室友们决定每月举办一次类似的文化活动，丰富宿舍生活，增进彼此了解。这次活动不仅展示了个人才艺，还增强了宿舍的文化氛围和凝聚力。"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-2">
+                    <div class="problem-body">
+                        <h3 class="problem-title">公益活动</h3>
+                        
+                        <p class="problem-text">组织宿舍公益活动，培养社会责任感和奉献精神，同时增强宿舍凝聚力：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">公益活动类型</h4>
+                                <ul class="problem-list">
+                                    <li>校园环保活动：组织宿舍成员参与校园清洁、垃圾分类宣传等活动</li>
+                                    <li>爱心义卖：组织宿舍爱心义卖，将所得捐给慈善机构</li>
+                                    <li>志愿服务：参与社区志愿服务，如敬老院慰问、社区清洁等</li>
+                                    <li>爱心捐赠：组织旧物捐赠，帮助有需要的人</li>
+                                    <li>公益宣传：制作公益宣传海报，在校园内宣传环保、节能等理念</li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h4 class="mb-3">活动组织流程</h4>
+                                <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                    <li>确定公益活动主题和目标</li>
+                                    <li>制定详细的活动计划</li>
+                                    <li>分配任务和责任</li>
+                                    <li>准备必要的物资和材料</li>
+                                    <li>开展活动并记录过程</li>
+                                    <li>活动后总结和分享</li>
+                                    <li>评估活动效果，提出改进建议</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <div class="strategy-box mt-4" style="background-color: #f0fff4;">
+                            <h4 class="strategy-title" style="color: #38a169;">公益活动案例</h4>
+                            <p style="font-style: italic; margin-bottom: 1rem;">
+                                "环境工程学院2023级2宿舍组织了一次'绿色宿舍'公益活动，宿舍成员共同制作了环保宣传海报，并在校园内开展了垃圾分类宣传活动。他们还组织了一次宿舍旧物回收活动，将收集到的旧书籍、文具等捐赠给了山区学校。通过这次活动，宿舍成员不仅增强了环保意识，还体验了奉献的快乐，同时也增进了彼此之间的友谊和信任。"
+                            </p>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div style="background-color: white; padding: 0.75rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">活动成果</h5>
+                                        <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                            <li>提高环保意识</li>
+                                            <li>帮助有需要的人</li>
+                                            <li>增强社会责任感</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div style="background-color: white; padding: 0.75rem; border-radius: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                        <h5 style="font-weight: 500; text-align: center; margin-bottom: 0.5rem;">活动感悟</h5>
+                                        <ul style="font-size: 0.875rem; padding-left: 1.5rem;">
+                                            <li>付出与收获并存</li>
+                                            <li>团队合作的重要性</li>
+                                            <li>小行动大影响</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 成果展示页面 -->
+        <div id="achievements" class="page">
+            <div class="container">
+                <h2 class="section-title">成果展示</h2>
+                <p class="section-description">展示成功改善宿舍氛围的案例，包括照片、室友反馈等，激励其他宿舍学习和借鉴</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title">成功案例展示</h3>
+                        
+                        <div class="achievement-card">
+                            <h4 class="achievement-title">案例一：从"问题宿舍"到"模范宿舍"</h4>
+                            
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div>
+                                        <p class="achievement-subtitle">宿舍基本情况：</p>
+                                        <p>计算机科学学院2022级3宿舍，6人间</p>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <p class="achievement-subtitle">存在问题：</p>
+                                        <ul class="problem-list">
+                                            <li>宿舍卫生状况差，经常被扣分</li>
+                                            <li>室友之间缺乏沟通，关系紧张</li>
+                                            <li>作息时间不一致，相互影响</li>
+                                            <li>使用违规电器，存在安全隐患</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <p class="achievement-subtitle">采取措施：</p>
+                                        <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                            <li>在团员带领下，组织宿舍会议，坦诚交流问题</li>
+                                            <li>共同制定详细的宿舍公约，明确各项规定</li>
+                                            <li>建立值日轮换制度，每人负责一天</li>
+                                            <li>设立宿舍基金，用于购买清洁用品和奖励</li>
+                                            <li>定期组织宿舍活动，增进感情</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6">
+                                    <div style="margin-bottom: 1rem;">
+                                        <img src="images3/9.jpg" alt="整洁的宿舍环境" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem;">
+                                    </div>
+                                    
+                                    <div>
+                                        <p class="achievement-subtitle">取得成果：</p>
+                                        <ul class="problem-list">
+                                            <li>宿舍卫生状况显著改善，连续三个月获得卫生优秀宿舍</li>
+                                            <li>室友关系融洽，形成互帮互助的氛围</li>
+                                            <li>作息时间规律，学习效率提高</li>
+                                            <li>安全意识增强，杜绝使用违规电器</li>
+                                            <li>获得学院"模范宿舍"称号</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div style="background-color: #fffbeb; padding: 1rem; border-radius: 0.5rem; margin-top: 1rem;">
+                                        <p style="font-style: italic; font-size: 0.875rem;">
+                                            "通过共同努力，我们宿舍从一个经常被投诉的'问题宿舍'变成了学院的'模范宿舍'。最重要的是，我们不再只是住在同一个房间的陌生人，而是成为了互相关心、互相帮助的好朋友。"
+                                            —— 宿舍长小王
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <h4 class="achievement-title">案例二：宿舍安全隐患整治</h4>
+                            
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div>
+                                        <p class="achievement-subtitle">宿舍基本情况：</p>
+                                        <p>机械工程学院2023级5宿舍，4人间</p>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <p class="achievement-subtitle">存在问题：</p>
+                                        <ul class="problem-list">
+                                            <li>多名室友使用大功率电器（电热毯、电饭煲等）</li>
+                                            <li>电线私拉乱接，存在严重安全隐患</li>
+                                            <li>室友安全意识淡薄，不重视安全问题</li>
+                                            <li>曾因电器问题引发小型火情</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <p class="achievement-subtitle">采取措施：</p>
+                                        <ol style="list-style-type: decimal; padding-left: 1.5rem;">
+                                            <li>团员主动与室友沟通，讲解大功率电器的危害</li>
+                                            <li>邀请学校保卫处人员进行安全知识讲座</li>
+                                            <li>组织观看宿舍火灾案例视频</li>
+                                            <li>共同清理违规电器，规范用电行为</li>
+                                            <li>制定宿舍安全检查制度，定期自查</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6">
+                                    <div style="margin-bottom: 1rem;">
+                                        <img src="images3/5.jpg" alt="宿舍常见的违禁电器" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem;">
+                                    </div>
+                                    
+                                    <div>
+                                        <p class="achievement-subtitle">取得成果：</p>
+                                        <ul class="problem-list">
+                                            <li>全面清理了违规电器，消除安全隐患</li>
+                                            <li>室友安全意识显著提高</li>
+                                            <li>规范了用电行为，杜绝私拉乱接</li>
+                                            <li>宿舍安全检查连续合格</li>
+                                            <li>被评为"安全示范宿舍"</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div style="background-color: #ebf8ff; padding: 1rem; border-radius: 0.5rem; margin-top: 1rem;">
+                                        <p style="font-style: italic; font-size: 0.875rem;">
+                                            "以前我们总觉得使用这些电器很方便，没想到存在这么大的安全隐患。经过这次整治，我们都认识到了安全的重要性，现在宿舍用电更加规范了，大家也更安心。"
+                                            —— 室友小李
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">室友反馈</h3>
+                        
+                        <p class="problem-text">以下是一些室友对宿舍改善成果的真实反馈：</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-card" style="background-color: #ebf8ff;">
+                                    <div class="testimonial-header">
+                                        <div class="testimonial-avatar" style="background-color: #bee3f8; color: #3182ce;">
+                                            L
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h4>李同学</h4>
+                                            <p>计算机科学学院 2022级</p>
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "以前我总是熬夜到很晚，不仅影响了室友休息，自己的身体和学习也受到了影响。通过宿舍公约的制定和执行，我逐渐养成了规律的作息习惯，现在每天都能保证充足的睡眠，精力充沛，学习效率也提高了。感谢室友们的理解和帮助！"
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-card" style="background-color: #f0fff4;">
+                                    <div class="testimonial-header">
+                                        <div class="testimonial-avatar" style="background-color: #c6f6d5; color: #38a169;">
+                                            Z
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h4>张同学</h4>
+                                            <p>机械工程学院 2023级</p>
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "我曾经是宿舍里的'大功率电器爱好者'，电热毯、电饭煲、电热水壶样样齐全。经过团员的耐心劝导和安全知识的学习，我认识到了这些电器的危险性。现在我已经完全不用这些电器了，宿舍也更安全了。安全真的比方便重要得多！"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-card" style="background-color: #fffbeb;">
+                                    <div class="testimonial-header">
+                                        <div class="testimonial-avatar" style="background-color: #feebc8; color: #d97706;">
+                                            W
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h4>王同学</h4>
+                                            <p>外语学院 2022级</p>
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "我是一个比较内向的人，刚入学时很难融入宿舍集体。通过宿舍组织的各种活动，我逐渐敞开心扉，和室友们建立了深厚的友谊。现在的宿舍生活是我大学生活中最珍贵的部分，我们不仅是室友，更是彼此成长路上的伙伴。"
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="testimonial-card" style="background-color: #fff5f5;">
+                                    <div class="testimonial-header">
+                                        <div class="testimonial-avatar" style="background-color: #fed7d7; color: #e53e3e;">
+                                            C
+                                        </div>
+                                        <div class="testimonial-info">
+                                            <h4>陈同学</h4>
+                                            <p>经济管理学院 2023级</p>
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-text">
+                                        "我们宿舍曾经因为卫生问题经常被扣分，大家互相推诿责任，关系也很紧张。在团员的带领下，我们制定了详细的值日表，明确了每个人的责任。现在宿舍整洁有序，我们也学会了尊重和理解他人，宿舍氛围变得和谐融洽。"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card mt-4" style="background-color: #faf5ff;">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar" style="background-color: #e9d8fd; color: #805ad5;">
+                                    L
+                                </div>
+                                <div class="testimonial-info">
+                                    <h4>刘辅导员</h4>
+                                    <p>计算机科学学院</p>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "通过'和谐宿舍共创平台'的推广和实施，我们学院的宿舍管理工作取得了显著成效。宿舍安全隐患大幅减少，宿舍文明程度明显提高，学生之间的关系更加和谐。特别是团员在其中发挥了重要的示范和带动作用，用实际行动影响和带动了身边的同学。这种自我管理、自我教育、自我服务的模式，不仅提高了宿舍管理的效率，也培养了学生的责任感和集体意识，是一种值得推广的宿舍管理新模式。"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 问题反馈页面 -->
+        <div id="feedback" class="page">
+            <div class="container">
+                <h2 class="section-title">问题反馈</h2>
+                <p class="section-description">发现宿舍问题？有改进建议？请通过以下表单告诉我们，我们会认真对待每一条反馈</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title mb-4">宿舍问题反馈表</h3>
+                        
+                        <form id="feedbackForm">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">姓名</label>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="请输入您的姓名" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="dormitory" class="form-label">宿舍号</label>
+                                        <input type="text" id="dormitory" name="dormitory" class="form-control" placeholder="请输入您的宿舍号" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">问题类型</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="problem-type" value="electrical" class="radio-input" required>
+                                        大功率电器使用问题
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="problem-type" value="lights" class="radio-input">
+                                        熄灯时间问题
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="problem-type" value="noise" class="radio-input">
+                                        大声喧哗与外放声音问题
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="problem-type" value="hygiene" class="radio-input">
+                                        宿舍卫生问题
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="problem-type" value="other" class="radio-input">
+                                        其他问题
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="description" class="form-label">问题描述</label>
+                                <textarea id="description" name="description" class="form-control" placeholder="请详细描述您遇到的问题" rows="5" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="suggestion" class="form-label">改进建议（选填）</label>
+                                <textarea id="suggestion" name="suggestion" class="form-control" placeholder="如果您有改进建议，请在此提出" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact" class="form-label">联系方式</label>
+                                <input type="text" id="contact" name="contact" class="form-control" placeholder="请输入您的手机号或邮箱" required>
+                            </div>
+                            
+                            <div style="background-color: #ebf8ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                                <h4 style="font-weight: 600; color: #3182ce; margin-bottom: 0.5rem;">处理流程</h4>
+                                <ol style="padding-left: 1.5rem;">
+                                    <li>提交反馈后，系统将自动记录您的问题</li>
+                                    <li>学生干部将在24小时内联系您了解详情</li>
+                                    <li>根据问题性质，我们会采取相应措施解决</li>
+                                    <li>问题解决后，我们会向您反馈处理结果</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="form-submit" onclick="submitFeedback(event)">提交反馈</button>
+                            </div>
+                        </form>
+                        
+                        <div id="feedbackSuccess" style="display: none; text-align: center; padding: 2rem 0;">
+                            <div style="width: 80px; height: 80px; background-color: #f0fff4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">反馈提交成功</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem;">感谢您的反馈，我们会尽快处理您的问题。</p>
+                            <button class="btn btn-primary" onclick="resetFeedbackForm()">提交新反馈</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 经验分享页面 -->
+        <div id="sharing" class="page">
+            <div class="container">
+                <h2 class="section-title">经验分享</h2>
+                <p class="section-description">分享你在营造和谐宿舍环境方面的经验和心得，帮助更多同学创建美好的宿舍生活</p>
+                
+                <div class="problem-card animate-fadeIn">
+                    <div class="problem-body">
+                        <h3 class="problem-title mb-4">经验分享</h3>
+                        
+                        <form id="sharingForm">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="share-name" class="form-label">姓名</label>
+                                        <input type="text" id="share-name" name="share-name" class="form-control" placeholder="请输入您的姓名" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="share-dormitory" class="form-label">宿舍号</label>
+                                        <input type="text" id="share-dormitory" name="share-dormitory" class="form-control" placeholder="请输入您的宿舍号" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="share-title" class="form-label">分享标题</label>
+                                <input type="text" id="share-title" name="share-title" class="form-control" placeholder="请输入分享标题" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">分享类别</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="share-category" value="self-discipline" class="radio-input" required>
+                                        自身规范经验
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="share-category" value="communication" class="radio-input">
+                                        沟通技巧分享
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="share-category" value="activities" class="radio-input">
+                                        活动组织经验
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="share-category" value="convention" class="radio-input">
+                                        宿舍公约制定
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="share-category" value="other" class="radio-input">
+                                        其他经验
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="share-content" class="form-label">分享内容</label>
+                                <textarea id="share-content" name="share-content" class="form-control" placeholder="请详细描述您的经验和心得" rows="8" required></textarea>
+              <p style="text-align: center; margin-left: auto; margin-right: auto; font-size: 20px;">
+                            
+                            <div class="form-group">
+                                <label for="share-image" class="form-label">上传图片（选填）</label>
+                                <input type="file" id="share-image" name="share-image" class="form-control" accept="image/*">
+                                <p style="font-size: 0.75rem; color: #666; margin-top: 0.25rem;">支持jpg、png格式，大小不超过2MB</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="share-contact" class="form-label">联系方式（选填）</label>
+                                <input type="text" id="share-contact" name="share-contact" class="form-control" placeholder="请输入您的手机号或邮箱">
+                                <p style="font-size: 0.75rem; color: #666; margin-top: 0.25rem;">如果您愿意与其他同学交流经验，可以留下联系方式</p>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="form-submit" onclick="submitSharing(event)">提交分享</button>
+                            </div>
+                        </form>
+                        
+                        <div id="sharingSuccess" style="display: none; text-align: center; padding: 2rem 0;">
+                            <div style="width: 80px; height: 80px; background-color: #f0fff4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#38a169" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">分享提交成功</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem;">感谢您的分享，您的经验将帮助更多同学创建和谐宿舍环境。</p>
+                            <button class="btn btn-primary" onclick="resetSharingForm()">分享新经验</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-card animate-fadeIn delay-1">
+                    <div class="problem-body">
+                        <h3 class="problem-title">优秀经验分享</h3>
+                        
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div class="experience-author">
+                                    <div class="experience-avatar">L</div>
+                                    <div class="experience-info">
+                                        <h4>李明</h4>
+                                        <p>计算机科学学院 2022级</p>
+                                    </div>
+                                </div>
+                                <div class="experience-date">2023-05-10</div>
+                            </div>
+                            <h4 style="font-size: 1.25rem; margin-bottom: 1rem;">如何有效组织宿舍文化活动</h4>
+                            <div class="experience-content">
+                                <p>在我们宿舍，每个月都会组织一次主题文化活动，如读书分享会、电影之夜等。这些活动不仅丰富了我们的课余生活，还增进了室友之间的感情。组织活动的关键是要充分考虑每位室友的兴趣和时间安排，确保大家都能积极参与。</p>
+                                <p style="margin-top: 1rem;">以下是我们组织活动的一些经验：</p>
+                                <ol style="list-style-type: decimal; padding-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li>提前规划：至少提前一周确定活动主题和时间，让大家有充分准备</li>
+                                    <li>兴趣调查：通过投票或讨论，选择大多数人感兴趣的活动主题</li>
+                                    <li>分工合作：明确每个人的任务和责任，共同参与活动准备</li>
+                                    <li>氛围营造：准备适当的零食和饮料，创造轻松愉快的氛围</li>
+                                    <li>记录分享：拍照记录活动过程，在宿舍建立活动相册</li>
+                                </ol>
+                                <p style="margin-top: 1rem;">通过定期组织这些活动，我们宿舍的氛围变得更加和谐，室友之间的关系也更加融洽。即使有时候因为学习或其他原因产生一些小摩擦，我们也能通过良好的沟通和理解很快解决。</p>
+                            </div>
+                            <div class="experience-footer">
+                                <div>
+                                    <span>阅读 256</span>
+                                    <span style="margin-left: 1rem;">点赞 128</span>
+                                </div>
+                                <div class="experience-actions">
+                                    <div class="experience-action">
+                                        <i class="fas fa-thumbs-up"></i>
+                                        <span>点赞</span>
+                                    </div>
+                                    <div class="experience-action">
+                                        <i class="fas fa-share"></i>
+                                        <span>分享</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <div class="experience-author">
+                                    <div class="experience-avatar">Z</div>
+                                    <div class="experience-info">
+                                        <h4>张华</h4>
+                                        <p>机械工程学院 2023级</p>
+                                    </div>
+                                </div>
+                                <div class="experience-date">2023-04-22</div>
+                            </div>
+                            <h4 style="font-size: 1.25rem; margin-bottom: 1rem;">宿舍公约制定的经验与技巧</h4>
+                            <div class="experience-content">
+                                <p>制定宿舍公约是营造和谐宿舍环境的重要一步。在我们的实践中，我们发现公约制定需要遵循"民主、实用、可执行"的原则。</p>
+                                <p style="margin-top: 1rem;">首先，要确保每位室友都有发言权，充分尊重每个人的意见和建议。我们采用了"头脑风暴+投票表决"的方式，让每位室友都能参与其中。</p>
+                                <p style="margin-top: 1rem;">其次，公约内容要切实可行，不要过于理想化。我们根据宿舍实际情况，制定了符合实际的规定，如作息时间、卫生值日、电器使用等方面的具体要求。</p>
+                                <p style="margin-top: 1rem;">最后，要建立有效的监督和奖惩机制。我们设立了"宿舍基金"，对违反公约的行为收取一定的"罚款"，用于宿舍集体活动。同时，我们也设立了"宿舍之星"评选，鼓励大家自觉遵守公约。</p>
+                                <p style="margin-top: 1rem;">通过这些措施，我们宿舍的公约得到了有效执行，宿舍环境和氛围明显改善。我们的经验是：公约不在于多么完美，而在于是否能够得到切实执行。</p>
+                            </div>
+                            <div class="experience-footer">
+                                <div>
+                                    <span>阅读 198</span>
+                                    <span style="margin-left: 1rem;">点赞 96</span>
+                                </div>
+                                <div class="experience-actions">
+                                    <div class="experience-action">
+                                        <i class="fas fa-thumbs-up"></i>
+                                        <span>点赞</span>
+                                    </div>
+                                    <div class="experience-action">
+                                        <i class="fas fa-share"></i>
+                                        <span>分享</span>
+                                    </div>
+									
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images3/1.jpg" alt="团徽" width="150" height="150" style="margin-right: 10px;">
+                        <img src="images3/2.jpg" alt="学校标志" width="200" height="60">
+                    </div>
+                    <p>和谐宿舍共创 © 2025 第18组 版权所有</p>
+                    
+                </div>
+                <div class="col-12 col-md-6 text-md-right">
+                    <p>联系我：3306574730@qq.com</p>
+                    <p>地址：广州城建职业学院清远校区</p>
+					<p>汇报人：钟玉婵&吴君奇</p>
+					<P>制作人：古贵炫</P>
+					<hr>
+					<p>第十八组成员：陈钰熙 周华兴 王子涵 陈哲毅 洪权宇翔 温楚琪 陈宇轩 蔡家霖 张敏婷 张馨 谭淇文 黄思颖 黄思婷 邹容 钟玉婵 吴君奇 古贵炫</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 引入粒子效果 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- 引入字体图标 -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // 页面切换功能
+        function showPage(pageId) {
+            // 隐藏所有页面
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+                page.style.display = 'none';
+            });
+            
+            // 显示选中的页面
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+                selectedPage.style.display = 'block';
+                
+                // 滚动到页面顶部
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // 移动端菜单切换
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const navbarMenu = document.getElementById('navbarMenu');
+            navbarMenu.classList.toggle('active');
+        });
+        
+        // 初始化粒子效果
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 50,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#e53e3e"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#e53e3e",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // 默认显示首页
+            showPage('home');
+        });
+        
+        // 问题反馈表单提交
+        function submitFeedback(event) {
+            event.preventDefault();
+            
+            // 在实际应用中，这里应该有表单验证和数据提交的代码
+            // 这里仅做演示，显示成功提交的信息
+            
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('feedbackSuccess').style.display = 'block';
+        }
+        
+        // 重置问题反馈表单
+        function resetFeedbackForm() {
+            document.getElementById('feedbackForm').reset();
+            document.getElementById('feedbackForm').style.display = 'block';
+            document.getElementById('feedbackSuccess').style.display = 'none';
+        }
+        
+        // 经验分享表单提交
+        function submitSharing(event) {
+            event.preventDefault();
+            
+            // 在实际应用中，这里应该有表单验证和数据提交的代码
+            // 这里仅做演示，显示成功提交的信息
+            
+            document.getElementById('sharingForm').style.display = 'none';
+            document.getElementById('sharingSuccess').style.display = 'block';
+        }
+        
+        // 重置经验分享表单
+        function resetSharingForm() {
+            document.getElementById('sharingForm').reset();
+            document.getElementById('sharingForm').style.display = 'block';
+            document.getElementById('sharingSuccess').style.display = 'none';
+        }
+        
+        // 添加页面动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-fadeIn');
+            
+            animateElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+            });
+            
+            setTimeout(() => {
+                animateElements.forEach(element => {
+                    element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

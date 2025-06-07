@@ -17,12 +17,15 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   useEffect(() => {
-    setIsLoading(true)
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
+    // 只在非首页路由切换时显示加载动画
+    if (pathname !== "/") {
+      setIsLoading(true)
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 1500)
 
-    return () => clearTimeout(timer)
+      return () => clearTimeout(timer)
+    }
   }, [pathname])
 
   const setLoading = (loading: boolean) => {
@@ -39,7 +42,7 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
-      {children}
+      <div>{children}</div>
     </LoadingContext.Provider>
   )
 }
