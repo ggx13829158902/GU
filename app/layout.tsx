@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   openGraph: {
     title: "DeepHue - 古贵炫的个人宇宙",
-    description: "内向星云中的理性代码与诗意光谱",
+    description: "星云中的理性代码与诗意光谱",
     type: "website",
     locale: "zh_CN",
     siteName: "DeepHue",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "DeepHue - 古贵炫的个人宇宙",
-    description: "内向星云中的理性代码与诗意光谱",
+    description: "星云中的理性代码与诗意光谱",
   },
   verification: {
     google: "your-google-verification-code",
