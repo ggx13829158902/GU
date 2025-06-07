@@ -50,7 +50,7 @@ export default function InterestsPage() {
         "音乐类型：华语流行、R&B",
         "音乐感悟：旋律是情感的载体",
       ],
-      quote: '"她的睫毛弯弯的，像月牙一样美丽"',
+      quote: '"她的睫毛 弯的嘴角 无预警地 对我笑"',
     },
   ]
 
@@ -71,7 +71,7 @@ export default function InterestsPage() {
         {/* 页面标题 */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-300 to-blue-300 bg-clip-text text-transparent mb-4">
-            ∷ 共振频率
+            共振频率
           </h1>
           <p className="text-green-200 text-lg max-w-2xl mx-auto">在兴趣的海洋中寻找共鸣，在爱好的世界里释放真我</p>
         </motion.div>

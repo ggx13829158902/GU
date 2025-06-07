@@ -215,7 +215,7 @@ export default function HomePage() {
           <blockquote className="text-lg text-blue-300/80 italic max-w-2xl mx-auto">
             "在无限的可能性中，寻找属于自己的那一道光。
             <br />
-            代码是我的语言，逻辑是我的诗歌，创造是我的信仰。"
+           心中无顶底，操作自随心
           </blockquote>
           <cite className="text-blue-400/60 text-sm mt-4 block">— 来自内心深处的声音</cite>
         </motion.div>
